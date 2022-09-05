@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\BlogPostRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\UuidV4;
@@ -13,14 +14,17 @@ class BlogPost
     public function __construct(
         #[ORM\Id]
         #[ORM\Column(type: 'uuid')]
-        private UuidV4 $id,
+        private UuidV4             $id,
 
         #[ORM\Column(type: Types::TEXT)]
-        private string $content,
+        private string             $content,
 
         #[ORM\ManyToOne]
         #[ORM\JoinColumn(nullable: false)]
-        private User   $author,
+        private User               $author,
+
+        #[ORM\Column]
+        private DateTimeImmutable $createdAt,
     )
     {
     }
@@ -38,5 +42,10 @@ class BlogPost
     public function getAuthor(): User
     {
         return $this->author;
+    }
+
+    public function getCreatedAt(): DateTimeImmutable
+    {
+        return $this->createdAt;
     }
 }

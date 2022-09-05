@@ -4,3 +4,4 @@ App\Entity\BlogPost:
             id: <(Symfony\Component\Uid\UuidV4::v4())>
             content: <text()>
             author: '@user_*'
+            createdAt: <dateTimeImmutableBetween("-200 days", "now")>
