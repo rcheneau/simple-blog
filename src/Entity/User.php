@@ -1,0 +1,100 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Uid\UuidV4;
+
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Table(name: '`user`')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
+{
+    public function __construct(
+        #[ORM\Id]
+        #[ORM\GeneratedValue]
+        #[ORM\Column]
+        private readonly UuidV4  $id,
+
+        #[ORM\Column(length: 180, unique: true)]
+        private ?string          $email,
+
+        #[ORM\Column(length: 20, unique: true)]
+        private readonly ?string $username,
+
+        #[ORM\Column]
+        private array            $roles = [],
+
+        #[ORM\Column]
+        private ?string          $password = null,
+    )
+    {
+
+    }
+
+    public function getId(): UuidV4
+    {
+        return $this->id;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return (string)$this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function updateEmail(string $email)
+    {
+        $this->email = $email;
+    }
+
+    public function updateRoles(array $roles)
+    {
+        $this->roles = $roles;
+    }
+
+    public function updatePassword(string $password)
+    {
+        $this->password = $password;
+    }
+}
