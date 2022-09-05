@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220905143653 extends AbstractMigration
+final class Version20220905150601 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -24,6 +24,10 @@ final class Version20220905143653 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_BA5AE01DF675F31B ON blog_post (author_id)');
         $this->addSql('COMMENT ON COLUMN blog_post.id IS \'(DC2Type:uuid)\'');
         $this->addSql('COMMENT ON COLUMN blog_post.author_id IS \'(DC2Type:uuid)\'');
+        $this->addSql('CREATE TABLE "user" (id UUID NOT NULL, password VARCHAR(255) DEFAULT NULL, email VARCHAR(180) NOT NULL, username VARCHAR(20) NOT NULL, roles JSON NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649E7927C74 ON "user" (email)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649F85E0677 ON "user" (username)');
+        $this->addSql('COMMENT ON COLUMN "user".id IS \'(DC2Type:uuid)\'');
         $this->addSql('ALTER TABLE blog_post ADD CONSTRAINT FK_BA5AE01DF675F31B FOREIGN KEY (author_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
     }
 
@@ -32,5 +36,6 @@ final class Version20220905143653 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE blog_post DROP CONSTRAINT FK_BA5AE01DF675F31B');
         $this->addSql('DROP TABLE blog_post');
+        $this->addSql('DROP TABLE "user"');
     }
 }
