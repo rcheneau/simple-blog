@@ -12,31 +12,30 @@ use Symfony\Component\Uid\UuidV4;
 #[ORM\Table(name: '`user`')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    public const R_ADMIN = 'ROLE_ADMIN';
+
+    #[ORM\Column]
+    private ?string $password = null;
 
     /**
      * @param UuidV4             $id
      * @param string             $email
      * @param string             $username
      * @param array<int, string> $roles
-     * @param string|null        $password
      */
     public function __construct(
         #[ORM\Id]
-        #[ORM\GeneratedValue]
-        #[ORM\Column]
-        private readonly UuidV4 $id,
+        #[ORM\Column(type: 'uuid')]
+        private UuidV4 $id,
 
         #[ORM\Column(length: 180, unique: true)]
-        private string          $email,
+        private string $email,
 
         #[ORM\Column(length: 20, unique: true)]
-        private readonly string $username,
+        private string $username,
 
         #[ORM\Column]
-        private array           $roles = [],
-
-        #[ORM\Column]
-        private ?string         $password = null,
+        private array  $roles = [],
     )
     {
 
