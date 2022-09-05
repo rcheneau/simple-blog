@@ -1,0 +1,6 @@
+App\Entity\BlogPost:
+    blog_post_{1..250}:
+        __construct:
+            id: <(Symfony\Component\Uid\UuidV4::v4())>
+            content: <text()>
+            author: '@user_*'
