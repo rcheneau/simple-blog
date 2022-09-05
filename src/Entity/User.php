@@ -12,23 +12,31 @@ use Symfony\Component\Uid\UuidV4;
 #[ORM\Table(name: '`user`')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
+    /**
+     * @param UuidV4             $id
+     * @param string             $email
+     * @param string             $username
+     * @param array<int, string> $roles
+     * @param string|null        $password
+     */
     public function __construct(
         #[ORM\Id]
         #[ORM\GeneratedValue]
         #[ORM\Column]
-        private readonly UuidV4  $id,
+        private readonly UuidV4 $id,
 
         #[ORM\Column(length: 180, unique: true)]
-        private ?string          $email,
+        private string          $email,
 
         #[ORM\Column(length: 20, unique: true)]
-        private readonly ?string $username,
+        private readonly string $username,
 
         #[ORM\Column]
-        private array            $roles = [],
+        private array           $roles = [],
 
         #[ORM\Column]
-        private ?string          $password = null,
+        private ?string         $password = null,
     )
     {
 
@@ -69,7 +77,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): string|null
     {
         return $this->password;
     }
@@ -77,24 +85,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
 
-    public function updateEmail(string $email)
+    public function updateEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
     }
 
-    public function updateRoles(array $roles)
+    /**
+     * @param array<int, string> $roles
+     *
+     * @return $this
+     */
+    public function updateRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
     }
 
-    public function updatePassword(string $password)
+    public function updatePassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
     }
 }
