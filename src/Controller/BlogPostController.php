@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class BlogPostController extends AbstractController
 {
-    #[Route(path: '/{page}', name: 'app_blog_post_list')]
+    #[Route(path: '/{page<\d+>}', name: 'app_blog_post_list')]
     public function list(EntityManagerInterface $em, PaginatorInterface $paginator, int $page = 1): Response
     {
         $pagination = $paginator->paginate(
