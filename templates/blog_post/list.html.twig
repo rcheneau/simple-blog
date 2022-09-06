@@ -1,5 +1,21 @@
 {% extends 'base.html.twig' %}
 
  {% block body %}
-    Hello
+     {# total items count #}
+     <div class="count">
+         {{ pagination.getTotalItemCount }}
+     </div>
+     <table>
+         {# table body #}
+         {% for post in pagination %}
+             <tr {% if loop.index is odd %}class="color"{% endif %}>
+                 <td>{{ post.content }}</td>
+                 <td>{{ post.createdAt | date('Y-m-d') }}</td>
+             </tr>
+         {% endfor %}
+     </table>
+     {# display navigation #}
+     <div class="navigation">
+         {{ knp_pagination_render(pagination) }}
+     </div>
  {% endblock %}
