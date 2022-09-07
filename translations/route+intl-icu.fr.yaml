@@ -1,0 +1,4 @@
+home: Accueil
+route.name.my_account: Mon compte
+route.name.login: Connexion
+route.name.logout: Déconnexion

@@ -1,0 +1,56 @@
+{% trans_default_domain 'route' %}
+
+<nav class="navbar navbar-expand-sm bg-light">
+    <div class="container-fluid">
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#app-navbar"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="dropdown float-end order-last">
+            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-user"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                {% for item in userDropdownItems %}
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            {% if item.icon is defined %}
+                                <i class="{{ item.icon }} me-3"></i>
+                            {% endif %}
+                            {% if item.text is defined %}
+                               {{ item.text | trans }}
+                            {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div id="app-navbar" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                {% for item in navbarItems %}
+                    <li class="nav-item">
+                        <a class="nav-link {{ currentRoute == item.name ? 'active' : '' }}"
+                                {{ currentRoute == item.name ? 'aria-current="page"' : '' }}
+                           href="#"
+                        >
+                            {% if item.icon is defined %}
+                                <i class="{{ item.icon }}"></i>
+                            {% endif %}
+                            {% if item.text is defined %}
+                                {{ item.text | trans }}
+                            {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>
