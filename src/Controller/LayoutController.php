@@ -5,6 +5,7 @@ namespace App\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,6 +33,14 @@ class LayoutController extends AbstractController
             'navbarItems'       => $navbarItems,
             'userDropdownItems' => $userDropdownItems,
             'currentRoute'      => $requestStack->getMainRequest()->attributes->get('_route'),
+        ]);
+    }
+
+    /** @noinspection PhpUnused */
+    public function footer(#[Autowire('%app.footer.icons%')] $icons): Response
+    {
+        return $this->render('layout/_footer.html.twig', [
+            'icons' => $icons,
         ]);
     }
 }

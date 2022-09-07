@@ -14,8 +14,19 @@
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </head>
-<body>
-{{ render(controller('App\\Controller\\LayoutController::navbar')) }}
-{% block body %}{% endblock %}
+<body class="d-flex flex-column vh-100">
+
+<header class="mb-2">
+    {{ render(controller('App\\Controller\\LayoutController::navbar')) }}
+</header>
+
+<main class="container mb-2">
+    {% block body %}{% endblock %}
+</main>
+
+<footer class="mt-auto">
+    {{ render(controller('App\\Controller\\LayoutController::footer')) }}
+</footer>
+
 </body>
 </html>
