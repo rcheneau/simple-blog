@@ -2,6 +2,8 @@ App\Entity\BlogPost:
     blog_post_{1..250}:
         __construct:
             id: <(Symfony\Component\Uid\UuidV4::v4())>
-            content: <text()>
+            title: <sentence(12, true))>
+            slug: <slug()>
+            content: <text(5000)>
             author: '@user_*'
             createdAt: <dateTimeImmutableBetween("-200 days", "now")>

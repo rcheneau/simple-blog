@@ -25,7 +25,7 @@
                                 <i class="{{ item.icon }} me-3"></i>
                             {% endif %}
                             {% if item.text is defined %}
-                               {{ item.text | trans }}
+                                {{ item.text | trans }}
                             {% endif %}
                         </a>
                     </li>
@@ -39,7 +39,7 @@
                     <li class="nav-item">
                         <a class="nav-link {{ currentRoute == item.name ? 'active' : '' }}"
                                 {{ currentRoute == item.name ? 'aria-current="page"' : '' }}
-                           href="#"
+                           href="{{ path(item.name) }}"
                         >
                             {% if item.icon is defined %}
                                 <i class="{{ item.icon }}"></i>

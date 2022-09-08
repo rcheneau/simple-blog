@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220905152110 extends AbstractMigration
+final class Version20220908083810 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,7 +20,8 @@ final class Version20220905152110 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE blog_post (id UUID NOT NULL, author_id UUID NOT NULL, content TEXT NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE blog_post (id UUID NOT NULL, author_id UUID NOT NULL, title VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, content TEXT NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_BA5AE01D989D9B62 ON blog_post (slug)');
         $this->addSql('CREATE INDEX IDX_BA5AE01DF675F31B ON blog_post (author_id)');
         $this->addSql('COMMENT ON COLUMN blog_post.id IS \'(DC2Type:uuid)\'');
         $this->addSql('COMMENT ON COLUMN blog_post.author_id IS \'(DC2Type:uuid)\'');
@@ -35,7 +36,6 @@ final class Version20220905152110 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE blog_post DROP CONSTRAINT FK_BA5AE01DF675F31B');
         $this->addSql('DROP TABLE blog_post');
         $this->addSql('DROP TABLE "user"');

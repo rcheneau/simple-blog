@@ -16,6 +16,12 @@ class BlogPost
         #[ORM\Column(type: 'uuid')]
         private UuidV4             $id,
 
+        #[ORM\Column]
+        private string             $title,
+
+        #[ORM\Column(unique: true)]
+        private string             $slug,
+
         #[ORM\Column(type: Types::TEXT)]
         private string             $content,
 
@@ -32,6 +38,16 @@ class BlogPost
     public function getId(): UuidV4
     {
         return $this->id;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
     }
 
     public function getContent(): string
