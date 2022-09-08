@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
-class LayoutController extends AbstractController
+final class LayoutController extends AbstractController
 {
     /** @noinspection PhpUnused */
     public function navbar(RequestStack $requestStack, Security $security): Response
