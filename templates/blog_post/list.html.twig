@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
  {% block body %}
+     <div class="d-flex justify-content-end">
+         <span class="text-muted">{{ 'listing.count' | trans({'count': pagination.getTotalItemCount}) }}</span>
+     </div>
      <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
          {% for post in pagination %}
              <div class="col">
@@ -17,10 +20,7 @@
              </div>
          {% endfor %}
      </div>
-     <div class="navigation">
-         <div class="count">
-             {{ pagination.getTotalItemCount }}
-         </div>
+     <div class="d-flex justify-content-center mt-5">
          {{ knp_pagination_render(pagination) }}
      </div>
  {% endblock %}

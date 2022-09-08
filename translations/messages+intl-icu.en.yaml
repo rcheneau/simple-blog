@@ -1,1 +1,7 @@
 btn.read: Read
+listing.count: >-
+    {count, plural,
+        =0    {No entries}
+        one   {One entry}
+        other {# entries}
+    }
