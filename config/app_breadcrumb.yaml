@@ -1,0 +1,9 @@
+app.breadcrumb:
+    app_blog_post_list:
+        text: route.name.blog_post_list
+
+    app_blog_post_item:
+        text: '{blogPost.title}'
+        parent: app_blog_post_list
+        params:
+            slug: '{blogPost.slug}'

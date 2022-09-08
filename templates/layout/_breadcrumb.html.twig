@@ -1,0 +1,25 @@
+{% trans_default_domain 'routes' %}
+
+{% set currentRouteName = app.request.attributes.get('_route') %}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        {% for item in breadcrumbManager.list(currentRouteName) %}
+            {% if item.text starts with '{' and item.text ends with '}' %}
+                {% set text = stringAttribute(item.text | trim('{', 'left') | trim('}', 'right')) %}
+            {% else %}
+                {% set text = item.text | trans %}
+            {% endif %}
+
+            {% set params = item.params | map(p => stringAttribute(p | trim('{', 'left') | trim('}', 'right')) ) %}
+
+            {% if currentRouteName == item.name %}
+                <li class="breadcrumb-item active" aria-current="page">{{ text }}</li>
+            {% else %}
+                <li class="breadcrumb-item">
+                    <a href="{{ path(item.name, params) }}">{{ text }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+</nav>
