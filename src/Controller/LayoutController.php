@@ -32,12 +32,16 @@ final class LayoutController extends AbstractController
         return $this->render('layout/_navbar.html.twig', [
             'navbarItems'       => $navbarItems,
             'userDropdownItems' => $userDropdownItems,
-            'currentRoute'      => $requestStack->getMainRequest()->attributes->get('_route'),
+            'currentRoute'      => $requestStack->getMainRequest()?->attributes->get('_route'),
         ]);
     }
 
-    /** @noinspection PhpUnused */
-    public function footer(#[Autowire('%app.footer.icons%')] $icons): Response
+    /**
+     * @param array<int, array<string, string>> $icons
+     *
+     * @return Response
+     */
+    public function footer(#[Autowire('%app.footer.icons%')] array $icons): Response
     {
         return $this->render('layout/_footer.html.twig', [
             'icons' => $icons,
