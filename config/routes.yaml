@@ -1,3 +1,10 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+    prefix: '/{_locale}'
+    defaults:
+        _locales: '%app.locale%'
+
+home_controller:
+    resource: ../src/Controller/HomeController.php
+    type: attribute
