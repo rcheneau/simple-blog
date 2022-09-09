@@ -1,0 +1,13 @@
+.pagination {
+  .page-item {
+    margin-right: 0.5rem;
+  }
+
+  .page-link {
+    border-radius: 0.475rem;
+  }
+
+  .page-item.etc.disabled > .page-link, .page-item.arrow.disabled > .page-link {
+    background-color: inherit;
+  }
+}
