@@ -1,10 +1,10 @@
-@import 'variables.scss';
+@import 'styles/variables.scss';
 
 @import '~bootstrap';
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
-@import 'components/button';
-@import 'components/breadcrumb';
+@import 'styles/components/button';
+@import 'styles/components/breadcrumb';
 
 body {
     background-color: $background;
