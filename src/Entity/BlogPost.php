@@ -55,6 +55,11 @@ class BlogPost
         return $this->content;
     }
 
+    public function getShortDescription(): string
+    {
+        return  mb_strimwidth($this->content, 0, 100, "...");
+    }
+
     public function getAuthor(): User
     {
         return $this->author;
