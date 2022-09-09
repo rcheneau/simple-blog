@@ -1,6 +1,6 @@
 {% trans_default_domain 'routes' %}
 
-<nav class="navbar navbar-expand-sm bg-light">
+<nav class="navbar navbar-expand-sm navbar-dark">
     <div class="container-fluid">
         <button class="navbar-toggler"
                 type="button"
@@ -14,7 +14,7 @@
         </button>
 
         <div class="dropdown float-end order-sm-last">
-            <i class="fa-solid fa-user me-1 ps-1 pe-1 cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false"></i>
+            <i class="fa-solid fa-user me-1 ps-1 pe-1 cursor-pointer text-white" data-bs-toggle="dropdown" aria-expanded="false"></i>
             <ul class="dropdown-menu dropdown-menu-end">
                 {% for item in userDropdownItems %}
                     <li>
