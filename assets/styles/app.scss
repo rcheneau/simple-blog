@@ -1,6 +1,19 @@
+@import 'variables.scss';
+
 @import '~bootstrap';
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
 body {
-    background-color: lightgray;
+    background-color: $background;
+}
+
+.btn {
+    text-transform: uppercase;
+    vertical-align: bottom;
+    border: 0;
+    box-shadow: 0 4px 9px -4px rgba(0,0,0,.35);
+    font-weight: 500;
+    padding: .625rem 1.5rem .5rem;
+    font-size: .75rem;
+    line-height: 1.5;
 }
