@@ -1271,6 +1271,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/open-sans@npm:^4.5.11":
+  version: 4.5.11
+  resolution: "@fontsource/open-sans@npm:4.5.11"
+  checksum: 63196b563006474104b9487570b8e39f923d645cc608a02eb1bcc2adaeb1c1f0e97bdd8e80e4e8c87d9677c429066a95a1f9afbe11fecac3136df6943cd54d6b
+  languageName: node
+  linkType: hard
+
 "@fortawesome/fontawesome-free@npm:^6.2.0":
   version: 6.2.0
   resolution: "@fortawesome/fontawesome-free@npm:6.2.0"
@@ -5502,6 +5509,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
+    "@fontsource/open-sans": ^4.5.11
     "@fortawesome/fontawesome-free": ^6.2.0
     "@hotwired/stimulus": ^3.0.0
     "@popperjs/core": ^2.11.6

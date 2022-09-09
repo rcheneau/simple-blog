@@ -2,6 +2,7 @@
 
 @import '~bootstrap';
 @import '~@fortawesome/fontawesome-free/css/all.css';
+@import '@fontsource/open-sans';
 
 @import 'styles/utilities/bootstrap-utilities';
 @import 'styles/components/button';
@@ -10,6 +11,8 @@
 
 body {
     background-color: $background;
+    color: $text-color;
+    font-family: 'Open Sans', system-ui;
 }
 
 header {
