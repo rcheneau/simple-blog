@@ -1,0 +1,19 @@
+.breadcrumb {
+  border-radius: 2px;
+  background-color: #f5f5f5;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-bottom: 1rem;
+  min-height: 3.5rem;
+  padding: .625rem 1rem;
+}
+
+.breadcrumb, .breadcrumb-item {
+  align-items: center;
+  display: flex;
+
+  a {
+    text-decoration: none;
+  }
+}
