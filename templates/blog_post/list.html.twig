@@ -12,7 +12,7 @@
                          <h5 class="card-title text-truncate">{{ post.title }}</h5>
                          <h6 class="card-subtitle mb-2 text-muted">{{ post.createdAt | date('Y-m-d') }}</h6>
                          <p class="card-text text-truncate">{{ post.content }}</p>
-                         <a href="{{ path('app_blog_post_item', {'slug': post.slug }) }}" class="btn btn-primary">
+                         <a href="{{ path('app_blog_post_item', {'slug': post.slug }) }}" class="btn btn-primary shadow">
                              {{ 'btn.read' | trans }}
                          </a>
                      </div>
