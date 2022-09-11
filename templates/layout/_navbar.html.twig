@@ -18,7 +18,7 @@
             <ul class="dropdown-menu dropdown-menu-end">
                 {% for item in userDropdownItems %}
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ path(item.name) }}">
                             {% if item.icon is defined %}
                                 <i class="{{ item.icon }} me-3"></i>
                             {% endif %}
