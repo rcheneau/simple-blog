@@ -1,5 +1,5 @@
 route.name.home: Accueil
 route.name.blog_post_list: Articles
-route.name.my_account: Mon compte
+route.name.profile: Mon compte
 route.name.login: Connexion
 route.name.logout: Déconnexion

@@ -22,7 +22,7 @@ final class LayoutController extends AbstractController
 
         $userDropdownItems = $security->isGranted('ROLE_USER')
             ? [
-                ['text' => 'route.name.my_account', 'name' => 'app_profile', 'icon' => 'fa-solid fa-user'],
+                ['text' => 'route.name.profile', 'name' => 'app_profile', 'icon' => 'fa-solid fa-user'],
                 ['text' => 'route.name.logout', 'name' => 'app_logout', 'icon' => 'fa-solid fa-right-from-bracket'],
             ]
             : [

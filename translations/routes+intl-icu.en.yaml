@@ -1,5 +1,5 @@
 route.name.home: Home
 route.name.blog_post_list: Posts
-route.name.my_account: My account
+route.name.profile: My account
 route.name.login: Login
 route.name.logout: Logout

@@ -2,6 +2,7 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     globals:
         breadcrumbManager: '@App\Service\BreadcrumbManager'
+        appName: '%env(APP_NAME)%'
 
 when@test:
     twig:

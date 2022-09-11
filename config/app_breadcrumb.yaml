@@ -10,3 +10,6 @@ app.breadcrumb:
 
     app_login:
         text:  route.name.login
+
+    app_profile:
+        text: route.name.profile

@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}{{ 'route.name.profile' | trans({}, 'routes') }}{% endblock %}
 
 {% block body %}
-
+    {{ app.user.email }}
+    {{ app.user.username }}
 {% endblock %}
