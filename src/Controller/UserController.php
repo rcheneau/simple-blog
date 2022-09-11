@@ -10,7 +10,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 final class UserController extends AbstractController
 {
-    #[Route(path: '/profile', name: 'app_profile')]
+    #[Route(path: '/user/profile', name: 'app_profile')]
     public function profile(): Response
     {
         return $this->render('user/profile.html.twig');
