@@ -3,7 +3,7 @@
 {% block title %}{{ 'route.name.login' | trans({}, 'routes') }}{% endblock %}
 
 {% block body %}
-    <form method="post" class="border p-5">
+    <form method="post" class="border p-5" name="login">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
