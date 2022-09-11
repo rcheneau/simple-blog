@@ -13,22 +13,34 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="dropdown float-end order-sm-last">
-            <i class="fa-solid fa-user me-1 ps-1 pe-1 cursor-pointer text-white" data-bs-toggle="dropdown" aria-expanded="false"></i>
-            <ul class="dropdown-menu dropdown-menu-end">
-                {% for item in userDropdownItems %}
-                    <li>
-                        <a class="dropdown-item" href="{{ path(item.name) }}">
-                            {% if item.icon is defined %}
-                                <i class="{{ item.icon }} me-3"></i>
-                            {% endif %}
-                            {% if item.text is defined %}
-                                {{ item.text | trans }}
-                            {% endif %}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
+        <div class="float-end order-sm-last">
+            {% if app.user %}
+                <div class="dropdown">
+                    <span class=" cursor-pointer text-white"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                    >
+                        {{ app.user.username }}
+                        <i class="fa-solid fa-user me-1 ps-1 pe-1"></i>
+                    </span>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        {% for item in userDropdownItems %}
+                            <li>
+                                <a class="dropdown-item" href="{{ path(item.name) }}">
+                                    {% if item.icon is defined %}
+                                        <i class="{{ item.icon }} me-3"></i>
+                                    {% endif %}
+                                    {% if item.text is defined %}
+                                        {{ item.text | trans }}
+                                    {% endif %}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <a class="btn btn-primary shadow" href="{{ path('app_login') }}">{{ 'route.name.login' | trans }}</a>
+            {% endif %}
         </div>
 
         <div id="app-navbar" class="collapse navbar-collapse">

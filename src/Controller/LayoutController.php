@@ -20,14 +20,10 @@ final class LayoutController extends AbstractController
             ['text' => 'route.name.home', 'name' => 'app_blog_post_list', 'icon' => 'fa-solid fa-house'],
         ];
 
-        $userDropdownItems = $security->isGranted('ROLE_USER')
-            ? [
-                ['text' => 'route.name.profile', 'name' => 'app_profile', 'icon' => 'fa-solid fa-user'],
-                ['text' => 'route.name.logout', 'name' => 'app_logout', 'icon' => 'fa-solid fa-right-from-bracket'],
-            ]
-            : [
-                ['text' => 'route.name.login', 'name' => 'app_login', 'icon' => 'fa-solid fa-user'],
-            ];
+        $userDropdownItems = [
+            ['text' => 'route.name.profile', 'name' => 'app_profile', 'icon' => 'fa-solid fa-user'],
+            ['text' => 'route.name.logout', 'name' => 'app_logout', 'icon' => 'fa-solid fa-right-from-bracket'],
+        ];
 
         return $this->render('layout/_navbar.html.twig', [
             'navbarItems'       => $navbarItems,
