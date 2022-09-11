@@ -5,3 +5,7 @@ listing.count: >-
         one   {Une entrée}
         other {# entrées}
     }
+form.title.please_sign_in: Veuillez vous identifier
+form.label.email: Email
+form.label.password: Mot de passe
+form.submit.sign_in: Connexion

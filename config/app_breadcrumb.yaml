@@ -7,3 +7,6 @@ app.breadcrumb:
         parent: app_blog_post_list
         params:
             slug: '{blogPost.slug}'
+
+    app_login:
+        text:  route.name.login

@@ -5,3 +5,7 @@ listing.count: >-
         one   {One entry}
         other {# entries}
     }
+form.title.please_sign_in: Please sign in
+form.label.email: Email
+form.label.password: Password
+form.submit.sign_in: Sign in
