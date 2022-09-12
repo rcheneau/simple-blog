@@ -8,9 +8,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+#[Route('/user')]
 final class UserController extends AbstractController
 {
-    #[Route(path: '/user/profile', name: 'app_profile')]
+    #[Route(path: '/profile', name: 'app_profile')]
     public function profile(): Response
     {
         return $this->render('user/profile.html.twig');
