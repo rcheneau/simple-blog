@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Security;
 final class LayoutController extends AbstractController
 {
     /** @noinspection PhpUnused */
-    public function navbar(RequestStack $requestStack, Security $security): Response
+    public function navbar(RequestStack $requestStack): Response
     {
         $navbarItems = [
             ['text' => 'route.name.home', 'name' => 'app_blog_post_list', 'icon' => 'fa-solid fa-house'],
@@ -36,6 +36,7 @@ final class LayoutController extends AbstractController
      * @param array<int, array<string, string>> $icons
      *
      * @return Response
+     * @noinspection PhpUnused
      */
     public function footer(#[Autowire('%app.footer.icons%')] array $icons): Response
     {
