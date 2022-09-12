@@ -13,6 +13,9 @@ final class BreadcrumbManager
      */
     private array $bc;
 
+    /**
+     * @param array<string, BreadcrumbItem> $bc
+     */
     public function __construct(array $bc)
     {
         $this->bc = $bc;
@@ -23,7 +26,7 @@ final class BreadcrumbManager
      *
      * @param string $name
      *
-     * @return array<int, array<string, string>>
+     * @return array<int, array<string, mixed>>
      */
     public function list(string $name): array
     {

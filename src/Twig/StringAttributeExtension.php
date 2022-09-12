@@ -33,14 +33,24 @@ final class StringAttributeExtension extends AbstractExtension
         ];
     }
 
-    public function computeStringAttribute(array $context, string $expr)
+    /**
+     * @param array<string, mixed> $context
+     * @param string               $expr
+     *
+     * @return mixed
+     */
+    public function computeStringAttribute(array $context, string $expr): mixed
     {
         [$objectName, $propertyName] = explode('.', $expr);
 
         $object = $context[$objectName] ?? null;
 
-        if(!$object) {
+        if (!$object) {
             throw new RuntimeException(sprintf('Object "%s" not found in twig\' context.', $objectName));
+        }
+
+        if (!is_array($object) && !is_object($object)) {
+            throw new RuntimeException(sprintf('Object "%s" should be either an associative array or an object.', $objectName));
         }
 
         return $this->propertyAccessor->getValue($object, $propertyName);
