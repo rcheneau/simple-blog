@@ -26,9 +26,9 @@ final class AdminController extends AbstractController
             routeName:           $route,
             page:                $request->query->getInt('page', 1),
             itemsPerPage:        $request->query->getInt('itemsPerPage', PaginationManager::DEFAULT_ITEMS_PER_PAGE),
-            sortField:           (string)$request->query->get('sort', 'post.createdAt'),
+            sortField:           (string)$request->query->get('sort', 'createdAt'),
             sortOrder:           $request->query->getAlpha('direction', Pagination::SORT_DIRECTION_DESC),
-            sortFieldsWhitelist: ['post.createdAt', 'author' => 'author.username'],
+            sortFieldsWhitelist: ['createdAt' => 'post.createdAt', 'author' => 'author.username'],
             routeParams:         $request->query->getIterator()->getArrayCopy(),
         );
 
