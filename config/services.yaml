@@ -29,3 +29,16 @@ services:
     # Instantiate service with own factory to control constructor's parameters
     App\Service\BreadcrumbManager:
         factory: '@App\Service\BreadcrumbManagerFactory'
+
+    pagerfanta.view.app:
+        class: Pagerfanta\View\OptionableView
+        arguments:
+            - '@pagerfanta.view.twitter_bootstrap5'
+            - {
+                proximity: 2,
+                prev_message: <i class="fa-solid fa-chevron-left"></i>,
+                next_message: <i class="fa-solid fa-chevron-right"></i>
+            }
+        public: false
+        tags:
+            - { name: pagerfanta.view, alias: app_pagination }

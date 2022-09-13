@@ -24,8 +24,5 @@
     </tbody>
 </table>
 <div class="d-flex justify-content-center mt-5 flex-wrap">
-    {{ pagerfanta(pagination.pager, null, {
-        'prev_message': '<i class="fa-solid fa-chevron-left"></i>',
-        'next_message': '<i class="fa-solid fa-chevron-right"></i>'
-    }) }}
+    {{ pagerfanta(pagination.pager, 'app_pagination') }}
 </div>
