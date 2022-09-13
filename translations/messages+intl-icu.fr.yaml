@@ -9,3 +9,9 @@ form.title.please_sign_in: Veuillez vous identifier
 form.label.email: Email
 form.label.password: Mot de passe
 form.submit.sign_in: Connexion
+
+blog_post.title: Titre
+blog_post.created_at: Créé le
+blog_post.author: Auteur
+
+datatable.no_data: Aucune donnée

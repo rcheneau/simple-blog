@@ -3,3 +3,6 @@ route.name.blog_post_list: Posts
 route.name.profile: My account
 route.name.login: Login
 route.name.logout: Logout
+route.name.admin.blog_post_manage: Posts manage
+
+route.admin: Admin

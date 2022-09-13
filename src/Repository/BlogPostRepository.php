@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\BlogPost;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,28 +40,10 @@ class BlogPostRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return BlogPost[] Returns an array of BlogPost objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('b.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?BlogPost
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function createBlogPostWithAuthorQueryBuilder(): QueryBuilder
+    {
+        return $this->createQueryBuilder('post')
+                    ->addSelect('author')
+                    ->leftJoin('post.author', 'author');
+    }
 }

@@ -9,3 +9,9 @@ form.title.please_sign_in: Please sign in
 form.label.email: Email
 form.label.password: Password
 form.submit.sign_in: Sign in
+
+blog_post.title: Title
+blog_post.created_at: Created at
+blog_post.author: Author
+
+datatable.no_data: No data

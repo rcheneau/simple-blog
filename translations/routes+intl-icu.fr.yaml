@@ -3,3 +3,6 @@ route.name.blog_post_list: Articles
 route.name.profile: Mon compte
 route.name.login: Connexion
 route.name.logout: Déconnexion
+route.name.admin.blog_post_manage: Gestion des articles
+
+route.admin: Admin
