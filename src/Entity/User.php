@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpPropertyCanBeReadonlyInspection (because of doctrine proxy) */
+
 namespace App\Entity;
 
 use App\Repository\UserRepository;
@@ -46,11 +48,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
+    /** @noinspection PhpUnused */
     public function getEmail(): string
     {
         return $this->email;
     }
 
+    /** @noinspection PhpUnused */
     public function getUsername(): string
     {
         return $this->username;
@@ -58,7 +62,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUserIdentifier(): string
     {
-        return (string)$this->email;
+        return $this->email;
     }
 
     /**

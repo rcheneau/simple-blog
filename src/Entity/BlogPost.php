@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpPropertyCanBeReadonlyInspection (because of doctrine proxy) */
+
 namespace App\Entity;
 
 use App\Repository\BlogPostRepository;
@@ -14,20 +16,20 @@ class BlogPost
     public function __construct(
         #[ORM\Id]
         #[ORM\Column(type: 'uuid')]
-        private UuidV4             $id,
+        private UuidV4            $id,
 
         #[ORM\Column]
-        private string             $title,
+        private string            $title,
 
         #[ORM\Column(unique: true)]
-        private string             $slug,
+        private string            $slug,
 
         #[ORM\Column(type: Types::TEXT)]
-        private string             $content,
+        private string            $content,
 
         #[ORM\ManyToOne]
         #[ORM\JoinColumn(nullable: false)]
-        private User               $author,
+        private User              $author,
 
         #[ORM\Column]
         private DateTimeImmutable $createdAt,
@@ -45,6 +47,7 @@ class BlogPost
         return $this->title;
     }
 
+    /** @noinspection PhpUnused */
     public function getSlug(): string
     {
         return $this->slug;
@@ -55,9 +58,10 @@ class BlogPost
         return $this->content;
     }
 
+    /** @noinspection PhpUnused */
     public function getShortDescription(): string
     {
-        return  mb_strimwidth($this->content, 0, 100, "...");
+        return mb_strimwidth($this->content, 0, 100, "...");
     }
 
     public function getAuthor(): User
@@ -65,6 +69,7 @@ class BlogPost
         return $this->author;
     }
 
+    /** @noinspection PhpUnused */
     public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;
