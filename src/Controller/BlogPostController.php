@@ -3,9 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\BlogPost;
+use App\Models\Pagination;
+use App\Repository\BlogPostRepository;
+use App\Service\PaginationManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,12 +17,22 @@ use Symfony\Component\Routing\Annotation\Route;
 final class BlogPostController extends AbstractController
 {
     #[Route(path: '/{page<\d+>}', name: 'app_blog_post_list')]
-    public function blogPostList(EntityManagerInterface $em, PaginatorInterface $paginator, int $page = 1): Response
+    public function blogPostList(BlogPostRepository $blogPostRepository,
+                                 Request            $request,
+                                 PaginationManager  $paginationManager,
+                                 int                $page = 1): Response
     {
-        $pagination = $paginator->paginate(
-            $em->createQuery('SELECT p FROM App\Entity\BlogPost p ORDER BY p.createdAt DESC'),
-            $page,
-            12
+        /** @var string $route */
+        $route = $request->attributes->get('_route');
+
+        $pagination = $paginationManager->generate(
+            queryBuilder: $blogPostRepository->createBlogPostWithAuthorQueryBuilder(),
+            routeName:    $route,
+            page:         $page,
+            itemsPerPage: 12,
+            sortField:    'post.createdAt',
+            sortOrder:    Pagination::SORT_DIRECTION_DESC,
+            routeParams:  $request->query->getIterator()->getArrayCopy(),
         );
 
         return $this->render(
