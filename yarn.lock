@@ -3570,6 +3570,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hotkeys-js@npm:>=3":
+  version: 3.10.0
+  resolution: "hotkeys-js@npm:3.10.0"
+  checksum: 4bb3db45514a18b8dd17a7544d4db3f31a4da08ef918671bc552be828f323796fcaf7f616d8530a2839c9dd04739047090ea106210b2b4da520c7db5cf63744c
+  languageName: node
+  linkType: hard
+
 "hpack.js@npm:^2.1.6":
   version: 2.1.6
   resolution: "hpack.js@npm:2.1.6"
@@ -5511,6 +5518,7 @@ __metadata:
     regenerator-runtime: ^0.13.9
     sass: ^1.54.8
     sass-loader: ^13.0.0
+    stimulus-use: ^0.50.0
     webpack-notifier: ^1.15.0
   languageName: unknown
   linkType: soft
@@ -5896,6 +5904,17 @@ __metadata:
   version: 1.5.0
   resolution: "statuses@npm:1.5.0"
   checksum: c469b9519de16a4bb19600205cffb39ee471a5f17b82589757ca7bd40a8d92ebb6ed9f98b5a540c5d302ccbc78f15dc03cc0280dd6e00df1335568a5d5758a5c
+  languageName: node
+  linkType: hard
+
+"stimulus-use@npm:^0.50.0":
+  version: 0.50.0
+  resolution: "stimulus-use@npm:0.50.0"
+  dependencies:
+    hotkeys-js: ">=3"
+  peerDependencies:
+    "@hotwired/stimulus": ">= 3"
+  checksum: f244acbac92c78b0a0bc4f8b14732fcfee9da2772e66551bdb606bd1cb3bf64db6b8e485578d3e4ac67cd672b737c26adeb3ea5eeba7979d63e831561b04944d
   languageName: node
   linkType: hard
 

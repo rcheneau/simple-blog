@@ -33,7 +33,7 @@ final class AdminController extends AbstractController
         );
 
         return $this->render(
-            'admin/blog_post_manage.html.twig',
+            $request->isXmlHttpRequest() ? 'blog_post/_datatable.html.twig' : 'admin/blog_post_manage.html.twig',
             [
                 'pagination' => $pagination,
             ]

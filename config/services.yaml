@@ -30,14 +30,15 @@ services:
     App\Service\BreadcrumbManager:
         factory: '@App\Service\BreadcrumbManagerFactory'
 
-    pagerfanta.view.app:
+    pagerfanta.view.app_pagination:
         class: Pagerfanta\View\OptionableView
         arguments:
-            - '@pagerfanta.view.twitter_bootstrap5'
+            - '@App\Pager\PagerView'
             - {
                 proximity: 2,
                 prev_message: <i class="fa-solid fa-chevron-left"></i>,
-                next_message: <i class="fa-solid fa-chevron-right"></i>
+                next_message: <i class="fa-solid fa-chevron-right"></i>,
+                ajax_mode: false # If enabled pagination won't reload page but instead submit event pagination#goTo with href value
             }
         public: false
         tags:

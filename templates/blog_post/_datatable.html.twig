@@ -1,28 +1,32 @@
-<table class="table table-striped table-hover border">
-    <thead>
-    <tr>
-        <th scope="col">{{ 'blog_post.title' | trans }}</th>
-        <th scope="col">
-            {{ pagination_sortable(pagination, 'blog_post.author' | trans, 'author') }}
-        </th>
-        <th scope="col">
-            {{ pagination_sortable(pagination, 'blog_post.created_at' | trans, 'createdAt') }}
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for post in pagination.pager %}
+<div data-controller="datatable"
+     data-action="pagination:goTo->datatable#refresh"
+>
+    <table class="table table-striped table-hover border">
+        <thead>
         <tr>
-            <td>{{ post.title }}</td>
-            <td>{{ post.author.username }}</td>
-            <td>{{ post.createdAt | date('Y-m-d') }}</td>
+            <th scope="col">{{ 'blog_post.title' | trans }}</th>
+            <th scope="col">
+                {{ pagination_sortable(pagination, 'blog_post.author' | trans, 'author') }}
+            </th>
+            <th scope="col">
+                {{ pagination_sortable(pagination, 'blog_post.created_at' | trans, 'createdAt') }}
+            </th>
         </tr>
-    {% endfor %}
-    {% if pagination.pager is empty %}
-        {{ 'datatable.no_data' }}
-    {% endif %}
-    </tbody>
-</table>
-<div class="d-flex justify-content-center mt-5 flex-wrap">
-    {{ pagerfanta(pagination.pager, 'app_pagination') }}
+        </thead>
+        <tbody>
+        {% for post in pagination.pager %}
+            <tr>
+                <td>{{ post.title }}</td>
+                <td>{{ post.author.username }}</td>
+                <td>{{ post.createdAt | date('Y-m-d') }}</td>
+            </tr>
+        {% endfor %}
+        {% if pagination.pager is empty %}
+            {{ 'datatable.no_data' }}
+        {% endif %}
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center mt-5 flex-wrap">
+        {{ pagerfanta(pagination.pager, 'app_pagination', {'ajax_mode': true}) }}
+    </div>
 </div>
