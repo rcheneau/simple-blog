@@ -3,7 +3,9 @@
     {{ ajaxMode ? 'data-controller="pagination"' : '' }}
     data-action="pagination#goTo"
 >
-    <span class="float-end">
+    <div class="d-flex">
+        <div>{{ title }}</div>
+        <div class="ms-auto">
         {% if sorted %}
             {% if direction == 'desc' %}
                 <i class="fa fa-sort-down"></i>
@@ -13,6 +15,6 @@
         {% else %}
             <i class="fa fa-sort"></i>
         {% endif %}
-    </span>
-    {{ title }}
+    </div>
+    </div>
 </a>
