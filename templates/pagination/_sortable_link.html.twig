@@ -1,7 +1,7 @@
 <a  {% for attr, value  in attributes %}
     {{ attr }}="{{ value }}" {% endfor %}
-    {{ ajaxMode ? 'data-controller="pagination"' : '' }}
-    data-action="pagination#goTo"
+    {{ ajaxMode ? 'data-controller="dt-paginate"' : '' }}
+    data-action="dt-paginate#goTo"
 >
     <div class="d-flex">
         <div>{{ title }}</div>

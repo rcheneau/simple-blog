@@ -20,7 +20,7 @@ class PagerTemplate extends TwitterBootstrap5Template
             $ajaxMode = false;
         }
 
-        return $ajaxMode ? '<div data-controller="pagination">' . $containerTemplate . '</div>' : $containerTemplate;
+        return $ajaxMode ? '<div data-controller="dt-paginate">' . $containerTemplate . '</div>' : $containerTemplate;
     }
 
     /**
@@ -32,7 +32,7 @@ class PagerTemplate extends TwitterBootstrap5Template
         $rel = $rel ? sprintf(' rel="%s"', $rel) : '';
 
         return sprintf(
-            '<li class="%s"><a class="page-link" href="%s"%s data-action="pagination#goTo">%s</a></li>',
+            '<li class="%s"><a class="page-link" href="%s"%s data-action="dt-paginate#goTo">%s</a></li>',
             $liClass,
             $href,
             $rel,
