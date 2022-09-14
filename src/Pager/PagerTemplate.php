@@ -28,8 +28,10 @@ class PagerTemplate extends TwitterBootstrap5Template
         $liClass = implode(' ', array_filter(['page-item', $class]));
         $rel = $rel ? sprintf(' rel="%s"', $rel) : '';
 
+        /** @noinspection HtmlUnknownAttribute */
+        /** @noinspection HtmlUnknownTarget */
         return sprintf(
-            '<li class="%s"><a class="page-link" href="%s"%s data-action="dt-paginate#goTo">%s</a></li>',
+            '<li class="%s"><a class="page-link" href="%s" %s data-action="dt-paginate#goTo">%s</a></li>',
             $liClass,
             $href,
             $rel,
