@@ -1,6 +1,9 @@
 <div data-controller="dt-refresh"
      data-action="dt-paginate:goTo->dt-refresh#refresh dt-filter:search->dt-refresh#refresh"
 >
+    <div class="d-flex justify-content-end">
+        <span class="text-muted">{{ 'listing.count' | trans({'count': pagination.pager.count}) }}</span>
+    </div>
     <table class="table table-striped table-hover border">
         <thead>
         <tr>
