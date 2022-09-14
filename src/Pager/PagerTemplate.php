@@ -9,10 +9,7 @@ class PagerTemplate extends TwitterBootstrap5Template
 {
     public function container(): string
     {
-        $containerTemplate = sprintf(
-            $this->option('container_template'),
-            $this->option('css_container_class')
-        );
+        $containerTemplate = parent::container();
 
         try {
             $ajaxMode = $this->option('ajax_mode');
