@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Models\Pagination;
+use RuntimeException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
@@ -39,7 +40,7 @@ final class PaginationTwigProcessor
     public function sortable(Pagination $pagination,
                              string     $title,
                              string     $key,
-                             bool       $ajaxMode,
+                             bool       $ajaxMode = false,
                              array      $attributes = [],
                              array      $options = []): array
     {
@@ -66,6 +67,44 @@ final class PaginationTwigProcessor
             'ajaxMode'   => $ajaxMode,
             'sorted'     => $pagination->sortField === $key,
             'direction'  => $direction,
+        ];
+    }
+
+    /**
+     * Create a search url for the field named $title and identified by $key which consists of alias and field.
+     * $options allows to control query parameter's names:
+     *      - param_page_name, by default 'page'
+     *
+     * @param Pagination           $pagination
+     * @param string               $title
+     * @param string               $key
+     * @param string               $placeholder
+     * @param array<string, mixed> $options
+     *
+     * @return array<string, mixed>
+     */
+    public function filterable(Pagination $pagination,
+                               string     $title,
+                               string     $key,
+                               string     $placeholder = '',
+                               array      $options = []): array
+    {
+        $paramPageName = $options['param_page_name'] ?? 'page';
+
+        $params                 = $pagination->routeParams;
+        $params[$paramPageName] = 1;
+
+        return [
+            'title'       => $title,
+            'key'         => $key,
+            'value'       => $pagination->filters[$key] ?? '',
+            'placeholder' => $placeholder,
+            'routeName'   => $pagination->routeName,
+            'routeParams' => $this->urlGenerator->generate(
+                $pagination->routeName,
+                $params,
+                UrlGeneratorInterface::RELATIVE_PATH
+            ),
         ];
     }
 }

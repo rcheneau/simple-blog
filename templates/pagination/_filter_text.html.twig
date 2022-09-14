@@ -1,0 +1,10 @@
+<label for="dt-filter-{{ key }}" class="visually-hidden">{{ title }}</label>
+<input id="dt-filter-{{ key }}"
+       class="form-control"
+       placeholder="{{ placeholder }}"
+       data-action="dt-filter#textSearch"
+       value="{{ value }}"
+       data-path-info="{{ app.request.pathinfo }}"
+       data-params="{{ routeParams }}"
+       data-param-name="{{ key }}"
+>

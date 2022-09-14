@@ -17,6 +17,7 @@ final class Pagination
      * @param PagerfantaInterface<mixed> $pager
      * @param string                     $routeName
      * @param array<string, mixed>       $routeParams
+     * @param array<string, string>      $filters
      * @param string|null                $sortField
      * @param string|null                $sortOrder
      */
@@ -24,6 +25,7 @@ final class Pagination
         public PagerfantaInterface $pager,
         public string              $routeName,
         public array               $routeParams,
+        public array               $filters = [],
         public ?string             $sortField = null,
         public ?string             $sortOrder = null,
     )

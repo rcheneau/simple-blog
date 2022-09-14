@@ -18,18 +18,18 @@ final class PaginationTwigProcessorTest extends TestCase
         $processor = new PaginationTwigProcessor($urlGen);
         $pager  = $this->createMock(PagerfantaInterface::class);
 
-        $pagination = new Pagination($pager, 'r', [], null, 'desc');
+        $pagination = new Pagination($pager, 'r', [],  [], null, 'desc');
         $params = $processor->sortable($pagination, 'test', 'test.name');
         $this->assertEquals('test', $params['title']);
         $this->assertEquals('desc', $params['direction']);
         $this->assertFalse($params['sorted']);
 
-        $pagination = new Pagination($pager, 'r', [], 'test.name', 'asc');
+        $pagination = new Pagination($pager, 'r', [], [], 'test.name', 'asc');
         $params = $processor->sortable($pagination, 'test', 'test.name');
         $this->assertTrue($params['sorted']);
         $this->assertEquals('asc', $params['direction']);
 
-        $pagination = new Pagination($pager, 'r', [], 'test.name', 'zzz');
+        $pagination = new Pagination($pager, 'r', [], [], 'test.name', 'zzz');
         $params = $processor->sortable($pagination, 'test', 'test.name');
         $this->assertEquals('asc', $params['direction']);
     }
@@ -45,19 +45,35 @@ final class PaginationTwigProcessorTest extends TestCase
         $processor = new PaginationTwigProcessor($urlGen);
         $pager  = $this->createMock(PagerfantaInterface::class);
 
-        $pagination = new Pagination($pager, 'r', [], 'test.name', 'desc');
+        $pagination = new Pagination($pager, 'r', [], [], 'test.name', 'desc');
         $params = $processor->sortable($pagination, 'test', 'test.name');
         $this->assertStringContainsString('direction=asc', $params['attributes']['href']);
         $this->assertStringNotContainsString('direction=desc', $params['attributes']['href']);
 
-        $pagination = new Pagination($pager, 'r', ['direction' => 'asc'], 'test.name', 'asc');
+        $pagination = new Pagination($pager, 'r', ['direction' => 'asc'], [], 'test.name', 'asc');
         $params = $processor->sortable($pagination, 'test', 'test.name');
         $this->assertStringContainsString('direction=desc', $params['attributes']['href']);
         $this->assertStringNotContainsString('direction=asc', $params['attributes']['href']);
 
-        $pagination = new Pagination($pager, 'r', ['test' => '1'], 'test.name', 'asc');
+        $pagination = new Pagination($pager, 'r', ['test' => '1'], [], 'test.name', 'asc');
         $params = $processor->sortable($pagination, 'test', 'test.name');
         $this->assertStringContainsString('direction=desc', $params['attributes']['href']);
         $this->assertStringContainsString('test=1', $params['attributes']['href']);
+    }
+
+    public function testPaginationProcessorFilterable()
+    {
+        $urlGen = $this->createMock(UrlGeneratorInterface::class);
+        $urlGen->method('generate')->will(
+            $this->returnCallback(function ($name, $params) {
+                return "$name?" . join('&', array_map(fn($k, $v) => "$k=$v", array_keys($params), $params));
+            })
+        );
+        $processor = new PaginationTwigProcessor($urlGen);
+        $pager  = $this->createMock(PagerfantaInterface::class);
+        $pagination = new Pagination($pager, 'r', ['page' => '2'], [], 'test.name', 'asc');
+        $params = $processor->filterable($pagination, 'test', 'test.name');
+        $this->assertStringContainsString('page=1', $params['routeParams']);
+        $this->assertStringNotContainsString('page=2', $params['routeParams']);
     }
 }

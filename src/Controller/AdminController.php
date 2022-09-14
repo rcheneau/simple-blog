@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Models\Filter;
 use App\Models\Pagination;
 use App\Repository\BlogPostRepository;
 use App\Service\PaginationManager;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +23,19 @@ final class AdminController extends AbstractController
         /** @var string $route */
         $route = $request->attributes->get('_route');
 
+        $filters = [
+            'title'  => new Filter(
+                'post.title',
+                fn(QueryBuilder $qb, $v) => $qb->andWhere('post.title LIKE :title')
+                                               ->setParameter('title', "%$v%")
+            ),
+            'author' => new Filter(
+                'author.username',
+                fn(QueryBuilder $qb, $v) => $qb->andWhere('author.username LIKE :username')
+                                               ->setParameter('username', "%$v%")
+            ),
+        ];
+
         $pagination = $paginationManager->generate(
             queryBuilder:        $blogPostRepository->createBlogPostWithAuthorQueryBuilder(),
             routeName:           $route,
@@ -29,6 +44,8 @@ final class AdminController extends AbstractController
             sortField:           (string)$request->query->get('sort', 'createdAt'),
             sortOrder:           $request->query->getAlpha('direction', Pagination::SORT_DIRECTION_DESC),
             sortFieldsWhitelist: ['createdAt' => 'post.createdAt', 'author' => 'author.username'],
+            filters:             $filters,
+            filterValues:        $request->query->all('search'),
             routeParams:         $request->query->getIterator()->getArrayCopy(),
         );
 

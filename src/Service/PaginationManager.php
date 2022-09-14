@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Models\Filter;
 use App\Models\Pagination;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
@@ -36,6 +37,8 @@ final class PaginationManager
      * @param string|null               $sortField
      * @param string                    $sortOrder
      * @param array<int|string, string> $sortFieldsWhitelist
+     * @param array<string, Filter>     $filters
+     * @param array<string, string>     $filterValues
      * @param array<string, mixed>      $routeParams
      *
      * @return Pagination
@@ -47,6 +50,8 @@ final class PaginationManager
                              ?string      $sortField = null,
                              string       $sortOrder = Pagination::SORT_DIRECTION_ASC,
                              array        $sortFieldsWhitelist = [],
+                             array        $filters = [],
+                             array        $filterValues = [],
                              array        $routeParams = []): Pagination
     {
         $sortFieldQbName = $this->getQueryBuilderSortFieldName($sortField, $sortFieldsWhitelist);
@@ -62,6 +67,16 @@ final class PaginationManager
             $queryBuilder->orderBy($sortFieldQbName, $sortOrder);
         }
 
+        if (!empty($filterValues)) {
+            foreach ($filterValues as $name => $filterValue) {
+                $filter = $filters[$name] ?? null;
+                if (!$filter || $filterValue === '') {
+                    continue;
+                }
+                ($filter->callback)($queryBuilder, $filterValue);
+            }
+        }
+
         $pager = new Pagerfanta(new QueryAdapter($queryBuilder));
         $pager->setMaxPerPage($itemsPerPage > self::MAX_ITEMS_PER_PAGE ? self::DEFAULT_ITEMS_PER_PAGE : $itemsPerPage);
         $pager->setCurrentPage($page);
@@ -70,6 +85,7 @@ final class PaginationManager
             $pager,
             $routeName,
             $routeParams,
+            $filterValues,
             $sortFieldQbName ? $sortField : null,
             $sortOrder,
         );
@@ -83,7 +99,8 @@ final class PaginationManager
      *
      * @return string|null
      */
-    private function getQueryBuilderSortFieldName(?string $sortField, array $sortFieldsWhitelist): ?string
+    private
+    function getQueryBuilderSortFieldName(?string $sortField, array $sortFieldsWhitelist): ?string
     {
         if (empty($sortFieldsWhitelist)) {
             return $sortField;

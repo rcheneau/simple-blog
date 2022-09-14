@@ -1,5 +1,5 @@
 <div data-controller="dt-refresh"
-     data-action="dt-paginate:goTo->dt-refresh#refresh"
+     data-action="dt-paginate:goTo->dt-refresh#refresh dt-filter:search->dt-refresh#refresh"
 >
     <table class="table table-striped table-hover border">
         <thead>
@@ -11,6 +11,21 @@
             <th scope="col">
                 {{ pagination_sortable(pagination, 'blog_post.created_at' | trans, 'createdAt', ajaxMode) }}
             </th>
+        </tr>
+        <tr data-controller="dt-filter">
+            <th>
+                {{ pagination_filterable(
+                    pagination, 'blog_post.title' | trans, 'title',
+                    'datatable.search.placeholder.title' | trans
+                ) }}
+            </th>
+            <th>
+                {{ pagination_filterable(
+                    pagination, 'blog_post.author' | trans, 'author',
+                    'datatable.search.placeholder.author' | trans
+                ) }}
+            </th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
