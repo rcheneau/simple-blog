@@ -6,10 +6,10 @@
         <tr>
             <th scope="col">{{ 'blog_post.title' | trans }}</th>
             <th scope="col">
-                {{ pagination_sortable(pagination, 'blog_post.author' | trans, 'author') }}
+                {{ pagination_sortable(pagination, 'blog_post.author' | trans, 'author', ajaxMode) }}
             </th>
             <th scope="col">
-                {{ pagination_sortable(pagination, 'blog_post.created_at' | trans, 'createdAt') }}
+                {{ pagination_sortable(pagination, 'blog_post.created_at' | trans, 'createdAt', ajaxMode) }}
             </th>
         </tr>
         </thead>
@@ -27,6 +27,6 @@
         </tbody>
     </table>
     <div class="d-flex justify-content-center mt-5 flex-wrap">
-        {{ pagerfanta(pagination.pager, 'app_pagination', {'ajax_mode': true}) }}
+        {{ pagerfanta(pagination.pager, 'app_pagination', {'ajax_mode': ajaxMode}) }}
     </div>
 </div>

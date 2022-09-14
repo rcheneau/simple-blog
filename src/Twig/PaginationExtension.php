@@ -37,6 +37,7 @@ final class PaginationExtension extends AbstractExtension
      * @param Pagination           $pagination
      * @param string               $title
      * @param string               $key
+     * @param bool                 $ajaxMode
      * @param array<string, mixed> $attributes
      * @param array<string, mixed> $options
      *
@@ -49,12 +50,13 @@ final class PaginationExtension extends AbstractExtension
                              Pagination  $pagination,
                              string      $title,
                              string      $key,
+                             bool        $ajaxMode = false,
                              array       $attributes = [],
                              array       $options = []): string
     {
         return $env->render(
             'pagination/_sortable_link.html.twig',
-            $this->processor->sortable($pagination, $title, $key, $attributes, $options)
+            $this->processor->sortable($pagination, $title, $key, $ajaxMode, $attributes, $options)
         );
     }
 }

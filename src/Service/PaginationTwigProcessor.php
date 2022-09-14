@@ -30,6 +30,7 @@ final class PaginationTwigProcessor
      * @param Pagination           $pagination
      * @param string               $title
      * @param string               $key
+     * @param bool                 $ajaxMode
      * @param array<string, mixed> $attributes
      * @param array<string, mixed> $options
      *
@@ -38,6 +39,7 @@ final class PaginationTwigProcessor
     public function sortable(Pagination $pagination,
                              string     $title,
                              string     $key,
+                             bool       $ajaxMode,
                              array      $attributes = [],
                              array      $options = []): array
     {
@@ -61,6 +63,7 @@ final class PaginationTwigProcessor
             'options'    => $options,
             'attributes' => $attributes,
             'title'      => $title,
+            'ajaxMode'   => $ajaxMode,
             'sorted'     => $pagination->sortField === $key,
             'direction'  => $direction,
         ];

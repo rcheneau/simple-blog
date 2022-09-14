@@ -1,4 +1,8 @@
-<a {% for attr, value  in attributes %} {{ attr }}="{{ value }}" {% endfor %}>
+<a  {% for attr, value  in attributes %}
+    {{ attr }}="{{ value }}" {% endfor %}
+    {{ ajaxMode ? 'data-controller="pagination"' : '' }}
+    data-action="pagination#goTo"
+>
     <span class="float-end">
         {% if sorted %}
             {% if direction == 'desc' %}

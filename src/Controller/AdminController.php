@@ -36,6 +36,7 @@ final class AdminController extends AbstractController
             $request->isXmlHttpRequest() ? 'blog_post/_datatable.html.twig' : 'admin/blog_post_manage.html.twig',
             [
                 'pagination' => $pagination,
+                'ajaxMode'   => true,
             ]
         );
     }
