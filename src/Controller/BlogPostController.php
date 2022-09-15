@@ -36,9 +36,10 @@ final class BlogPostController extends AbstractController
         );
 
         return $this->render(
-            'blog_post/list.html.twig',
+            $request->isXmlHttpRequest() ? 'blog_post/_list.html.twig' : 'blog_post/list.html.twig',
             [
                 'pagination' => $pagination,
+                'ajaxMode' => true,
             ]
         );
     }

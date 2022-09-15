@@ -3,33 +3,5 @@
 {% block title %}{{ 'route.name.blog_post_list' | trans({}, 'routes') }}{% endblock %}
 
  {% block body %}
-     <div class="d-flex justify-content-end">
-         <span class="text-muted">{{ 'listing.count' | trans({'count': pagination.pager.count}) }}</span>
-     </div>
-     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
-         {% for post in pagination.pager %}
-             <div class="col">
-                 <div class="card shadow h-100">
-                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Solid_blue.svg/512px-Solid_blue.svg.png"
-                          class="card-img-top" alt="..." style="height: 200px">
-                     <div class="card-body">
-                         <h5 class="card-title text-truncate text-center" title="{{ post.title }}">
-                             {{ post.title }}
-                         </h5>
-                         <h6 class="card-subtitle mb-2 text-muted text-end">{{ post.createdAt | ago }}</h6>
-                         <p class="card-text">{{ post.shortDescription }}</p>
-                     </div>
-                     <div class="card-footer text-center">
-                         <a href="{{ path('app_blog_post_item', {'slug': post.slug }) }}"
-                            class="btn btn-primary shadow">
-                             {{ 'btn.read' | trans }}
-                         </a>
-                     </div>
-                 </div>
-             </div>
-         {% endfor %}
-     </div>
-     <div class="d-flex justify-content-center mt-5">
-         {{ pagerfanta(pagination.pager, 'app_pagination') }}
-     </div>
+     {% include 'blog_post/_list.html.twig' %}
  {% endblock %}
