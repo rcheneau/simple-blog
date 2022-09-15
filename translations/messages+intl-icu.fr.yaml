@@ -1,4 +1,6 @@
 btn.read: Lire
+btn.create: Créer
+
 listing.count: >-
     {count, plural,
         =0    {Aucune entrée}
@@ -11,6 +13,7 @@ form.label.password: Mot de passe
 form.submit.sign_in: Connexion
 
 blog_post.title: Titre
+blog_post.content: Contenu
 blog_post.created_at: Créé le
 blog_post.author: Auteur
 

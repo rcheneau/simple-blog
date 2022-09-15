@@ -1,4 +1,6 @@
 btn.read: Read
+btn.create: Create
+
 listing.count: >-
     {count, plural,
         =0    {No entries}
@@ -11,6 +13,7 @@ form.label.password: Password
 form.submit.sign_in: Sign in
 
 blog_post.title: Title
+blog_post.content: Content
 blog_post.created_at: Created at
 blog_post.author: Author
 

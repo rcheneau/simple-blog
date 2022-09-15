@@ -5,6 +5,10 @@
  {% block body %}
      <div class="card shadow">
          <div class="card-body">
+             <a href="{{ path('app_admin_blog_post_create') }}" class="btn btn-primary shadow">
+                 {{ 'btn.create' | trans }}
+             </a>
+
              {% include 'blog_post/_datatable.html.twig' %}
          </div>
      </div>

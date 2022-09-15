@@ -5,5 +5,6 @@ route.name.login: Connexion
 route.name.logout: Déconnexion
 route.name.admin: Administration
 route.name.admin.blog_post_manage: Gestion des articles
+route.name.admin.blog_post_create: Créer un article
 
 route.admin: Admin

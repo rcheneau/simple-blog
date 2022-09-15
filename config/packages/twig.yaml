@@ -3,6 +3,7 @@ twig:
     globals:
         breadcrumbManager: '@App\Service\BreadcrumbManager'
         appName: '%env(APP_NAME)%'
+    form_themes: ['bootstrap_5_layout.html.twig']
 
 when@test:
     twig:
