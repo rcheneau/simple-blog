@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'route.name.admin' | trans({}, 'routes') }}{% endblock %}
+
+{% block body %}
+    <div class="row row row-cols-1 row-cols-md-2 row-cols-lg-3">
+        <div class="col">
+            <div class="alert alert-primary" role="alert">
+                <i class="fa-solid fa-newspaper"></i>
+                {{ 'tile.admin.manage_blog_posts' | trans }}
+                <a href="{{ path('app_admin_blog_post_manage') }}" class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

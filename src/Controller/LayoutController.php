@@ -28,7 +28,7 @@ final class LayoutController extends AbstractController
         if ($security->isGranted(User::R_ADMIN)) {
             $userDropdownItems[] = [
                 'text' => 'route.admin',
-                'name' => 'app_admin_blog_post_manage',
+                'name' => 'app_admin',
                 'icon' => 'fa-solid fa-screwdriver-wrench',
             ];
 

@@ -13,3 +13,10 @@ app.breadcrumb:
 
     app_profile:
         text: route.name.profile
+
+    app_admin:
+        text: route.name.admin
+
+    app_admin_blog_post_manage:
+        parent: app_admin
+        text: route.name.admin.blog_post_manage

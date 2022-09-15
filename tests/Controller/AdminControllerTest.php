@@ -2,10 +2,18 @@
 
 namespace App\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
 class AdminControllerTest extends AbstractControllerTest
 {
+    public function testAdminHomepage()
+    {
+        $client = static::createClient();
+        $this->login($client);
+        $client->request('GET', '/fr/admin');
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('title', 'Administration');
+    }
+
     public function testAdminBlogPostManage()
     {
         $client = static::createClient();

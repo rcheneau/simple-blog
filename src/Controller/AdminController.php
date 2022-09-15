@@ -15,6 +15,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin')]
 final class AdminController extends AbstractController
 {
+    #[Route(path: '', name: 'app_admin')]
+    public function homepage(): Response
+    {
+        return $this->render('admin/homepage.html.twig');
+    }
+
     #[Route(path: '/posts', name: 'app_admin_blog_post_manage')]
     public function blogPostManage(Request            $request,
                                    BlogPostRepository $blogPostRepository,
