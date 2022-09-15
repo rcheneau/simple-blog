@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus';
 
 // noinspection JSUnusedGlobalSymbols
 export default class extends Controller {
-    async refresh(e) {
+    async reload(e) {
         const res = await fetch(e.detail.url, {
             headers: {'X-Requested-with': 'XMLHttpRequest'},
         });
