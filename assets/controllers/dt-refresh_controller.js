@@ -1,5 +1,4 @@
 import { Controller } from '@hotwired/stimulus';
-import { useDispatch } from 'stimulus-use';
 
 // noinspection JSUnusedGlobalSymbols
 export default class extends Controller {
@@ -8,6 +7,7 @@ export default class extends Controller {
             headers: {'X-Requested-with': 'XMLHttpRequest'},
         });
         this.element.innerHTML = await res.text();
-        history.pushState({ }, '', e.detail.url)
+        history.pushState({ }, '', e.detail.url);
+        this.element.scrollIntoView();
     }
 }
