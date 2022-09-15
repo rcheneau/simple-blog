@@ -1,5 +1,6 @@
-<div data-controller="reload-content"
-     data-action="dt-paginate:goTo->reload-content#reload dt-filter:search->reload-content#reload"
+<div {{ stimulus_controller('reload-content') }}
+        {{ stimulus_action('reload-content', 'reload', 'dt-paginate:goTo')
+        | stimulus_action('reload-content', 'reload', 'dt-filter:search') }}
 >
     <div class="d-flex justify-content-end">
         <span class="text-muted">{{ 'listing.count' | trans({'count': pagination.pager.count}) }}</span>
@@ -15,7 +16,7 @@
                 {{ pagination_sortable(pagination, 'blog_post.created_at' | trans, 'createdAt', ajaxMode) }}
             </th>
         </tr>
-        <tr data-controller="dt-filter">
+        <tr {{ stimulus_controller('dt-filter') }}>
             <th>
                 {{ pagination_filterable(
                     pagination, 'blog_post.title' | trans, 'title',
