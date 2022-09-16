@@ -1,4 +1,5 @@
-<div {{ stimulus_controller('reload-content') }}
+<div class="table-responsive"
+        {{ stimulus_controller('reload-content') }}
         {{ stimulus_action('reload-content', 'reload', 'dt-paginate:goTo')
         | stimulus_action('reload-content', 'reload', 'dt-filter:search') }}
 >
