@@ -40,8 +40,19 @@
                 <td>{{ post.title }}</td>
                 <td>{{ post.author.username }}</td>
                 <td>{{ post.createdAt | date('Y-m-d') }}</td>
-                <td>
-                    <a href="{{ path('app_admin_blog_post_edit', {'slug': post.slug}) }}">
+                <td class="text-nowrap">
+                    <a href="{{ path('app_blog_post_item', {'slug': post.slug}) }}"
+                       class="text-decoration-none"
+                       aria-label="{{ 'btn.read' | trans }}"
+                       title="{{ 'btn.read' | trans }}"
+                    >
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    <a href="{{ path('app_admin_blog_post_edit', {'slug': post.slug}) }}"
+                       class="text-decoration-none"
+                       aria-label="{{ 'btn.edit' | trans }}"
+                       title="{{ 'btn.edit' | trans }}"
+                    >
                         <i class="fa-solid fa-pen"></i>
                     </a>
                 </td>

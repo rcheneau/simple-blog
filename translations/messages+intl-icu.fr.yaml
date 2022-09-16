@@ -1,6 +1,7 @@
 btn.read: Lire
 btn.create: Créer
 btn.update: Mettre-à-jour
+btn.edit: Éditer
 
 listing.count: >-
     {count, plural,
