@@ -18,7 +18,7 @@ class UserProcessor implements ProcessorInterface
         $this->passwordHasher = $passwordHasher;
     }
 
-    public function preProcess(string $id, $object): void
+    public function preProcess(string $id, object $object): void
     {
         if (false === $object instanceof User) {
             return;
@@ -26,7 +26,7 @@ class UserProcessor implements ProcessorInterface
         $object->updatePassword($this->passwordHasher->hashPassword($object, 'password'));
     }
 
-    public function postProcess(string $id, $object): void
+    public function postProcess(string $id, object $object): void
     {
 
     }
