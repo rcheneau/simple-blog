@@ -3,5 +3,4 @@ php bin/console doctrine:database:drop --force --if-exists --env=test
 php bin/console doctrine:database:create --env=test
 php bin/console doctrine:migrations:migrate --no-interaction --env=test
 php bin/console hautelook:fixtures:load --no-interaction --env=test
-php bin/console app:create-user -a admin@email.test admin password --env=test
 echo -e " --> DONE\n"
