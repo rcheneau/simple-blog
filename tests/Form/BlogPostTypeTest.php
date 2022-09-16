@@ -37,16 +37,14 @@ final class BlogPostTypeTest extends TypeTestCase
         $formData = [
             'content' => 'My content...',
         ];
-        $model = new BlogPostInput();
-        $form  = $this->factory->create(BlogPostType::class, $model);
+        $form  = $this->factory->create(BlogPostType::class);
         $form->submit($formData);
         $this->assertFalse($form->isValid());
 
         $formData = [
             'title' => 'My title',
         ];
-        $model = new BlogPostInput();
-        $form  = $this->factory->create(BlogPostType::class, $model);
+        $form  = $this->factory->create(BlogPostType::class);
         $form->submit($formData);
         $this->assertFalse($form->isValid());
 
@@ -54,8 +52,8 @@ final class BlogPostTypeTest extends TypeTestCase
             'title' => 'My title',
             'content' => [],
         ];
-        $model = new BlogPostInput();
-        $form  = $this->factory->create(BlogPostType::class, $model);
+
+        $form  = $this->factory->create(BlogPostType::class);
         $form->submit($formData);
         $this->assertFalse($form->isValid());
     }
