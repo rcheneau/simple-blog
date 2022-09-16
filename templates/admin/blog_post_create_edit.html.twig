@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ (blogPost ? 'route.name.admin.blog_post_edit' : 'route.name.admin.blog_post_create') | trans({}, 'routes') }}
+{% endblock %}
+
+ {% block body %}
+     <div class="card shadow">
+         <div class="card-body">
+             {% if blogPost %}
+                 <div class="mb-3">
+                     <div>
+                         {{ 'blog_post.author' | trans }}
+                         {{ blogPost.author.username }}
+                     </div>
+                    <div>
+                        {{ 'blog_post.created_at' | trans }}
+                        {{ blogPost.createdAt | format_datetime }}
+                    </div>
+                 </div>
+             {% endif %}
+
+             {{ form_start(form) }}
+             {{ form_widget(form) }}
+             <div class="d-flex justify-content-end">
+                 <button type="submit" class="btn btn-primary">
+                     {{ (blogPost ? 'btn.update' : 'btn.create') | trans }}
+                 </button>
+             </div>
+
+             {{ form_end(form) }}
+         </div>
+     </div>
+ {% endblock %}

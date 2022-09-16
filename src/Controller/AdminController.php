@@ -36,15 +36,15 @@ final class AdminController extends AbstractController
         $route = $request->attributes->get('_route');
 
         $filters = [
-            'title'  => new Filter(
+            'title' => new Filter(
                 'post.title',
                 fn(QueryBuilder $qb, $v) => $qb->andWhere('post.title LIKE :title')
-                                               ->setParameter('title', "%$v%")
+                    ->setParameter('title', "%$v%")
             ),
             'author' => new Filter(
                 'author.username',
                 fn(QueryBuilder $qb, $v) => $qb->andWhere('author.username LIKE :username')
-                                               ->setParameter('username', "%$v%")
+                    ->setParameter('username', "%$v%")
             ),
         ];
 
@@ -65,7 +65,7 @@ final class AdminController extends AbstractController
             $request->isXmlHttpRequest() ? 'blog_post/_datatable.html.twig' : 'admin/blog_post_manage.html.twig',
             [
                 'pagination' => $pagination,
-                'ajaxMode'   => true,
+                'ajaxMode' => true,
             ]
         );
     }
@@ -75,22 +75,45 @@ final class AdminController extends AbstractController
                                    BlogPostInputDataTransformer $dataTransformer,
                                    EntityManagerInterface       $em): Response
     {
-        $form = $this->createForm(BlogPostType::class);
+        return $this->handleBlogPostForm($request, $dataTransformer, $em);
+    }
+
+    #[Route(path: '/posts/edit/{slug}', name: 'app_admin_blog_post_edit')]
+    public function blogPostEdit(BlogPost                     $blogPost,
+                                 Request                      $request,
+                                 BlogPostInputDataTransformer $dataTransformer,
+                                 EntityManagerInterface       $em): Response
+    {
+        return $this->handleBlogPostForm($request, $dataTransformer, $em, $blogPost);
+    }
+
+    private function handleBlogPostForm(Request                      $request,
+                                        BlogPostInputDataTransformer $dataTransformer,
+                                        EntityManagerInterface       $em,
+                                        ?BlogPost                    $blogPost = null): Response
+    {
+        $form = $this->createForm(BlogPostType::class, $blogPost ? $dataTransformer->transforms($blogPost) : null);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var BlogPostInput $data */
             $data = $form->getData();
-            $post = $dataTransformer->transforms($data);
 
-            $em->persist($post);
+            if ($blogPost) {
+                $blogPost->updateTitle($data->title);
+                $blogPost->updateContent($data->content);
+            } else {
+                $blogPost = $dataTransformer->createBlogPost($data);
+            }
+
+            $em->persist($blogPost);
             $em->flush();
 
             return $this->redirectToRoute('app_admin_blog_post_manage');
         }
-
-        return $this->render('admin/blog_post_create.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'admin/blog_post_create_edit.html.twig',
+            ['form' => $form->createView(), 'blogPost' => $blogPost]
+        );
     }
 }

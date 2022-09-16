@@ -24,3 +24,9 @@ app.breadcrumb:
     app_admin_blog_post_create:
         parent: app_admin_blog_post_manage
         text: route.name.admin.blog_post_create
+
+    app_admin_blog_post_edit:
+        text: '{blogPost.title}'
+        parent: app_admin_blog_post_manage
+        params:
+            slug: '{blogPost.slug}'

@@ -23,7 +23,7 @@ final class BlogPostInputDataTransformer
         $this->security = $security;
     }
 
-    public function transforms(BlogPostInput $input): BlogPost
+    public function createBlogPost(BlogPostInput $input): BlogPost
     {
         /** @var User $user */
         $user = $this->security->getUser();
@@ -35,6 +35,14 @@ final class BlogPostInputDataTransformer
             $input->content,
             $user,
             new DateTimeImmutable()
+        );
+    }
+
+    public function transforms(BlogPost $blogPost): BlogPostInput
+    {
+        return new BlogPostInput(
+            $blogPost->getTitle(),
+            $blogPost->getContent(),
         );
     }
 }

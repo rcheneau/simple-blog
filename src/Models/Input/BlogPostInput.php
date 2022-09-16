@@ -9,10 +9,14 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class BlogPostInput
 {
-    #[NotBlank]
-    #[Length(max: 255)]
-    public string $title;
+    public function __construct(
+        #[NotBlank]
+        #[Length(max: 255)]
+        public string $title = '',
 
-    #[NotBlank]
-    public string $content;
+        #[NotBlank]
+        public string $content = '',
+    )
+    {
+    }
 }

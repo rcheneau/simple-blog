@@ -6,5 +6,6 @@ route.name.logout: Logout
 route.name.admin: Administration
 route.name.admin.blog_post_manage: Posts manage
 route.name.admin.blog_post_create: Create post
+route.name.admin.blog_post_edit: Edit post
 
 route.admin: Admin

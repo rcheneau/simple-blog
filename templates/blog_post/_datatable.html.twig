@@ -15,6 +15,7 @@
             <th scope="col">
                 {{ pagination_sortable(pagination, 'blog_post.created_at' | trans, 'createdAt', ajaxMode) }}
             </th>
+            <th scope="col"></th>
         </tr>
         <tr {{ stimulus_controller('dt-filter') }}>
             <th>
@@ -30,6 +31,7 @@
                 ) }}
             </th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -38,6 +40,11 @@
                 <td>{{ post.title }}</td>
                 <td>{{ post.author.username }}</td>
                 <td>{{ post.createdAt | date('Y-m-d') }}</td>
+                <td>
+                    <a href="{{ path('app_admin_blog_post_edit', {'slug': post.slug}) }}">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
         {% if pagination.pager is empty %}

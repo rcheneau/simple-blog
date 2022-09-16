@@ -74,4 +74,18 @@ class BlogPost
     {
         return $this->createdAt;
     }
+
+    public function updateTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function updateContent(string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
+    }
 }
