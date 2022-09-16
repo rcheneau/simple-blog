@@ -9,14 +9,26 @@
          <div class="card-body">
              {% if blogPost %}
                  <div class="mb-3">
-                     <div>
-                         {{ 'blog_post.author' | trans }}
-                         {{ blogPost.author.username }}
-                     </div>
-                    <div>
-                        {{ 'blog_post.created_at' | trans }}
-                        {{ blogPost.createdAt | format_datetime }}
-                    </div>
+                     <table class="table table-borderless table-sm">
+                         <tr>
+                             <td>{{ 'blog_post.author' | trans }}</td>
+                             <td>{{ blogPost.author.username }}</td>
+                         </tr>
+                         <tr>
+                             <td>{{ 'blog_post.created_at' | trans }}</td>
+                             <td>{{ blogPost.createdAt | format_datetime }}</td>
+                         </tr>
+                         {% if blogPost.updatedAt %}
+                             <tr>
+                                 <td>{{ 'blog_post.updated_by' | trans }}</td>
+                                 <td>{{ blogPost.updatedBy.username }}</td>
+                             </tr>
+                             <tr>
+                                 <td>{{ 'blog_post.updated_at' | trans }}</td>
+                                 <td>{{ blogPost.updatedAt | format_datetime }}</td>
+                             </tr>
+                         {% endif %}
+                     </table>
                  </div>
              {% endif %}
 

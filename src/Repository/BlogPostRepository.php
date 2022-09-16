@@ -44,6 +44,7 @@ class BlogPostRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('post')
                     ->addSelect('author')
-                    ->leftJoin('post.author', 'author');
+                    ->leftJoin('post.author', 'author')
+                    ->leftJoin('post.updatedBy', 'updated_by');
     }
 }

@@ -13,6 +13,13 @@ use Symfony\Component\Uid\UuidV4;
 #[ORM\Entity(repositoryClass: BlogPostRepository::class)]
 class BlogPost
 {
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?User $updatedBy = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?DateTimeImmutable $updatedAt = null;
+
     public function __construct(
         #[ORM\Id]
         #[ORM\Column(type: 'uuid')]
@@ -87,5 +94,23 @@ class BlogPost
         $this->content = $content;
 
         return $this;
+    }
+
+    public function updatedByAt(User $user, DateTimeImmutable $date): self
+    {
+        $this->updatedBy = $user;
+        $this->updatedAt = $date;
+
+        return $this;
+    }
+
+    public function getUpdatedBy(): ?User
+    {
+        return $this->updatedBy;
+    }
+
+    public function getUpdatedAt(): ?DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

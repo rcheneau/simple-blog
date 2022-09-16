@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\DataTransformer\BlogPostInputDataTransformer;
 use App\Entity\BlogPost;
+use App\Entity\User;
 use App\Form\BlogPostType;
 use App\Models\Filter;
 use App\Models\Input\BlogPostInput;
 use App\Models\Pagination;
 use App\Repository\BlogPostRepository;
 use App\Service\PaginationManager;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,7 +57,12 @@ final class AdminController extends AbstractController
             itemsPerPage: $request->query->getInt('itemsPerPage', PaginationManager::DEFAULT_ITEMS_PER_PAGE),
             sortField: (string)$request->query->get('sort', 'createdAt'),
             sortOrder: $request->query->getAlpha('direction', Pagination::SORT_DIRECTION_DESC),
-            sortFieldsWhitelist: ['createdAt' => 'post.createdAt', 'author' => 'author.username'],
+            sortFieldsWhitelist: [
+                'createdAt' => 'post.createdAt',
+                'author' => 'author.username',
+                'updatedAt' => 'post.updatedAt',
+                'updatedBy' => 'updated_by.username',
+            ],
             filters: $filters,
             filterValues: $request->query->all('search'),
             routeParams: $request->query->getIterator()->getArrayCopy(),
@@ -100,7 +107,10 @@ final class AdminController extends AbstractController
             $data = $form->getData();
 
             if ($blogPost) {
+                /** @var User $user */
+                $user = $this->getUser();
                 $data->updateBlogPost($blogPost);
+                $blogPost->updatedByAt($user, new DateTimeImmutable());
             } else {
                 $blogPost = $dataTransformer->createBlogPost($data);
             }

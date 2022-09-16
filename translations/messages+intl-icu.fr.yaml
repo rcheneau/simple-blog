@@ -18,6 +18,8 @@ blog_post.title: Titre
 blog_post.content: Contenu
 blog_post.created_at: Créé le
 blog_post.author: Auteur
+blog_post.updated_at: Mis-à-jour le
+blog_post.updated_by: Mis-à-jour par
 
 datatable.no_data: Aucune donnée
 datatable.search.placeholder.title: Rechercher un titre...

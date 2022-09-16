@@ -3,6 +3,7 @@
 namespace App\Tests\Controller;
 
 use App\Repository\BlogPostRepository;
+use DateTimeImmutable;
 
 class AdminControllerTest extends AbstractControllerTest
 {
@@ -32,7 +33,7 @@ class AdminControllerTest extends AbstractControllerTest
 
         /** @var BlogPostRepository $blogPostRepository */
         $blogPostRepository = static::getContainer()->get(BlogPostRepository::class);
-        $count =  $blogPostRepository->count([]);
+        $count = $blogPostRepository->count([]);
 
         $this->login($client);
 
@@ -57,9 +58,9 @@ class AdminControllerTest extends AbstractControllerTest
 
         /** @var BlogPostRepository $blogPostRepository */
         $blogPostRepository = static::getContainer()->get(BlogPostRepository::class);
-        $post =  $blogPostRepository->findOneBy([]);
+        $post = $blogPostRepository->findOneBy([]);
 
-        $this->login($client);
+        $loggedUser = $this->login($client);
 
         $crawler = $client->request('GET', '/fr/admin/posts/edit/' . $post->getSlug());
         $this->assertResponseIsSuccessful();
@@ -75,8 +76,10 @@ class AdminControllerTest extends AbstractControllerTest
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('title', 'Gestion des articles');
 
-        $updatedPost =  $blogPostRepository->find($post->getId());
-        $this->assertEquals('Updated title',$updatedPost->getTitle());
-        $this->assertEquals('Updated content',$updatedPost->getContent());
+        $updatedPost = $blogPostRepository->find($post->getId());
+        $this->assertEquals('Updated title', $updatedPost->getTitle());
+        $this->assertEquals('Updated content', $updatedPost->getContent());
+        $this->assertEquals($loggedUser->getId(), $updatedPost->getUpdatedBy()->getId());
+        $this->assertEquals($updatedPost->getUpdatedAt()->format('Y-m-d'), (new DateTimeImmutable())->format('Y-m-d'));
     }
 }

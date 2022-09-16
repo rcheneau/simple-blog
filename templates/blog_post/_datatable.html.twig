@@ -15,6 +15,12 @@
             <th scope="col">
                 {{ pagination_sortable(pagination, 'blog_post.created_at' | trans, 'createdAt', ajaxMode) }}
             </th>
+            <th scope="col">
+                {{ pagination_sortable(pagination, 'blog_post.updated_by' | trans, 'updatedBy', ajaxMode) }}
+            </th>
+            <th scope="col">
+                {{ pagination_sortable(pagination, 'blog_post.updated_at' | trans, 'updatedAt', ajaxMode) }}
+            </th>
             <th scope="col"></th>
         </tr>
         <tr {{ stimulus_controller('dt-filter') }}>
@@ -32,6 +38,8 @@
             </th>
             <th></th>
             <th></th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -40,6 +48,8 @@
                 <td>{{ post.title }}</td>
                 <td>{{ post.author.username }}</td>
                 <td>{{ post.createdAt | date('Y-m-d') }}</td>
+                <td>{{ post.updatedBy ? post.updatedBy.username : '' }}</td>
+                <td>{{ post.updatedAt ? (post.updatedAt | date('Y-m-d')) : '' }}</td>
                 <td class="text-nowrap">
                     <a href="{{ path('app_blog_post_item', {'slug': post.slug}) }}"
                        class="text-decoration-none"

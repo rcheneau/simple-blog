@@ -18,6 +18,8 @@ blog_post.title: Title
 blog_post.content: Content
 blog_post.created_at: Created at
 blog_post.author: Author
+blog_post.updated_at: Updated at
+blog_post.updated_by: Updated by
 
 datatable.no_data: No data
 datatable.search.placeholder.title: Search title...
