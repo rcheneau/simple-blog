@@ -1,4 +1,10 @@
 App\Entity\User:
+    admin:
+        __construct:
+            id: <(Symfony\Component\Uid\UuidV4::v4())>
+            email: admin@email.test
+            username: admin
+            roles: [ 'ROLE_ADMIN' ]
     user_{1..3}:
         __construct:
             id: <(Symfony\Component\Uid\UuidV4::v4())>
