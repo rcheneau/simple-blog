@@ -15,11 +15,11 @@ use Symfony\Component\Uid\UuidV4;
 final class BlogPostInputDataTransformer
 {
     private UniqueSlugger $slugger;
-    private Security         $security;
+    private Security $security;
 
     public function __construct(UniqueSlugger $slugger, Security $security)
     {
-        $this->slugger  = $slugger;
+        $this->slugger = $slugger;
         $this->security = $security;
     }
 
@@ -30,9 +30,9 @@ final class BlogPostInputDataTransformer
 
         return new BlogPost(
             UuidV4::v4(),
-            $input->title,
-            $this->slugger->uniqueSlugInEntity($input->title, BlogPost::class)->toString(),
-            $input->content,
+            $input->title ?? '',
+            $this->slugger->uniqueSlugInEntity($input->title ?? '', BlogPost::class)->toString(),
+            $input->content ?? '',
             $user,
             new DateTimeImmutable()
         );

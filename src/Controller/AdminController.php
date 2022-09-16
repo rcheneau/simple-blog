@@ -100,8 +100,7 @@ final class AdminController extends AbstractController
             $data = $form->getData();
 
             if ($blogPost) {
-                $blogPost->updateTitle($data->title);
-                $blogPost->updateContent($data->content);
+                $data->updateBlogPost($blogPost);
             } else {
                 $blogPost = $dataTransformer->createBlogPost($data);
             }
