@@ -35,10 +35,10 @@ services:
         arguments:
             - '@App\Pager\PagerView'
             - {
-                proximity: 2,
-                prev_message: <i class="fa-solid fa-chevron-left"></i>,
-                next_message: <i class="fa-solid fa-chevron-right"></i>,
-                ajax_mode: false # If enabled pagination won't reload page but instead submit event pagination#goTo with href value
+                  proximity: 2,
+                  prev_message: <i class="fa-solid fa-chevron-left"></i>,
+                  next_message: <i class="fa-solid fa-chevron-right"></i>,
+                  ajax_mode: false # If enabled pagination won't reload page but instead submit event pagination#goTo with href value
             }
         public: false
         tags:
