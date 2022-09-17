@@ -43,3 +43,11 @@ services:
         public: false
         tags:
             - { name: pagerfanta.view, alias: app_pagination }
+
+    # Enable commonmark extensions
+    League\CommonMark\Extension\GithubFlavoredMarkdownExtension:
+        tags: [ 'twig.markdown.league_extension' ]
+    League\CommonMark\Extension\Attributes\AttributesExtension:
+        tags: [ 'twig.markdown.league_extension' ]
+    League\CommonMark\Extension\Table\TableExtension:
+        tags: [ 'twig.markdown.league_extension' ]

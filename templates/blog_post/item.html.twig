@@ -5,5 +5,5 @@
 
  {% block body %}
      <h1>{{ blogPost.title }}</h1>
-     <p>{{ blogPost.content }}</p>
+     <p>{{ blogPost.content | markdown_to_html }}</p>
  {% endblock %}
