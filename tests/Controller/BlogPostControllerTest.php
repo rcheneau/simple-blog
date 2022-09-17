@@ -31,7 +31,7 @@ class BlogPostControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/fr/blog');
 
         $this->assertResponseIsSuccessful();
-        $link = $crawler->filter('.card-footer.text-center a')->link();
+        $link = $crawler->filter('.card .card-text a')->link();
 
         $client->request('GET', $link->getUri());
         $this->assertResponseIsSuccessful();

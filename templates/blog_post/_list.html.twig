@@ -15,13 +15,13 @@
                             {{ post.title }}
                         </h5>
                         <h6 class="card-subtitle mb-2 text-muted text-end">{{ post.createdAt | ago }}</h6>
-                        <p class="card-text">{{ post.shortDescription }}</p>
-                    </div>
-                    <div class="card-footer text-center">
-                        <a href="{{ path('app_blog_post_item', {'slug': post.slug }) }}"
-                           class="btn btn-primary shadow">
-                            {{ 'btn.read' | trans }}
-                        </a>
+                        <p class="card-text d-grid">
+                            <a href="{{ path('app_blog_post_item', {'slug': post.slug }) }}"
+                               class="btn btn-primary stretched-link shadow"
+                            >
+                                {{ 'btn.read' | trans }}
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>
