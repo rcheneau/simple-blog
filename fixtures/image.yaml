@@ -1,0 +1,8 @@
+App\Entity\Image:
+    image_{1..50}:
+        __construct:
+            id: <(Symfony\Component\Uid\UuidV4::v4())>
+            createdBy: '@user_*'
+            createdAt: <dateTimeImmutableBetween("-200 days", "now")>
+            title: <text(5, 25))>
+            description: <text(5, 100))>
