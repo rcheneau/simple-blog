@@ -8,6 +8,7 @@ use App\Entity\Image;
 use App\Entity\User;
 use App\Models\Input\ImageInput;
 use DateTimeImmutable;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Uid\UuidV4;
 
@@ -25,22 +26,31 @@ final class ImageInputDataTransformer
         /** @var User $user */
         $user = $this->security->getUser();
 
+        /** @var string $title */
+        $title = $input->title;
+
+        /** @var UploadedFile $file */
+        $file = $input->file;
+
         return new Image(
             UuidV4::v4(),
             $user,
             new DateTimeImmutable(),
-            $input->title,
+            $title,
             $input->description,
-            $input->file,
+            $file,
         );
     }
 
     public function transforms(Image $image): ImageInput
     {
+        /** @var ?UploadedFile $file */
+        $file = $image->getFile();
+
         return new ImageInput(
             $image->getTitle(),
             $image->getDescription(),
-            $image->getFile(),
+            $file,
         );
     }
 }

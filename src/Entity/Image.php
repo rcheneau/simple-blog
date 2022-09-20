@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ImageRepository;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -29,6 +30,7 @@ class Image
     #[ORM\Column]
     private string $mimeType = '';
 
+    /** @var array<int, int> */
     #[ORM\Column]
     private array $dimensions = [];
 
@@ -37,7 +39,7 @@ class Image
     private ?User $updatedBy;
 
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-    private DateTimeInterface $updatedAt;
+    private DateTimeImmutable $updatedAt;
 
     public function __construct(
         #[ORM\Id]
@@ -49,13 +51,13 @@ class Image
         private User              $createdBy,
 
         #[ORM\Column(type: 'datetime_immutable')]
-        private DateTimeInterface $createdAt,
+        private DateTimeImmutable $createdAt,
 
         #[ORM\Column(length: 25)]
-        private string $title,
+        private string            $title,
 
         #[ORM\Column(length: 100, nullable: true)]
-        private ?string $description,
+        private ?string           $description,
 
         #[Vich\UploadableField(
             mapping: 'image',
@@ -68,7 +70,7 @@ class Image
         private ?File             $file = null,
     )
     {
-        if($this->description === '') {
+        if ($this->description === '') {
             $this->description = null;
         }
     }
@@ -140,11 +142,18 @@ class Image
         return $this;
     }
 
+    /**
+     * @return int[]
+     */
     public function getDimensions(): array
     {
         return $this->dimensions;
     }
 
+    /**
+     * @param int[] $dimensions
+     * @return $this
+     */
     public function setDimensions(array $dimensions): self
     {
         $this->dimensions = $dimensions;
@@ -160,6 +169,24 @@ class Image
     public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
+    }
+
+    public function updatedByAt(User $user, DateTimeImmutable $dateTime): self
+    {
+        $this->updatedBy = $user;
+        $this->updatedAt = $dateTime;
+
+        return $this;
+    }
+
+    public function getUpdatedBy(): ?User
+    {
+        return $this->updatedBy;
+    }
+
+    public function getUpdatedAt(): ?DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 
     public function getTitle(): string
