@@ -5,16 +5,23 @@ namespace App\DataFixture;
 use App\Entity\Image;
 use Faker\Factory;
 use Fidry\AliceDataFixtures\ProcessorInterface;
+use RuntimeException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ImageProcessor implements ProcessorInterface
 {
-    private const PATH = __DIR__.'/assets/';
+    private const PATH = __DIR__ . '/assets/';
+    /** @var string[] */
     private array $availableImageNames;
 
     public function __construct()
     {
-        $this->availableImageNames = array_diff(scandir(self::PATH), ['.', '..']);
+        $filenames = scandir(self::PATH);
+        if (!$filenames) {
+            throw new RuntimeException(sprintf('Could load asset images from path %s.', self::PATH));
+        }
+
+        $this->availableImageNames = array_diff($filenames, ['.', '..']);
     }
 
     public function preProcess(string $id, object $object): void
@@ -25,6 +32,7 @@ class ImageProcessor implements ProcessorInterface
 
         $faker = Factory::create();
 
+        /** @var string $imageName */
         $imageName = $faker->randomElement($this->availableImageNames);
         $file = new UploadedFile(
             self::PATH . $imageName,
