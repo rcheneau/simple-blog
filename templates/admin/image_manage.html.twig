@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'route.name.admin.image_manage' | trans({}, 'routes') }}{% endblock %}
+
+ {% block body %}
+     <div class="card shadow">
+         <div class="card-body">
+             <a href="{{ path('app_admin_image_create') }}"
+                class="btn btn-primary shadow mb-5"
+             >
+                 {{ 'btn.create' | trans }}
+             </a>
+
+             <div class="row row-cols-md-2 row-cols-lg-3 g-0 app-gallery">
+                 {% for image in pagination.pager %}
+                     <div class="col app-zoom-on-hover">
+                         <a href="{{ path('app_image_download', {id: image.id}) }}" class="position-relative d-block">
+                             <img src="{{ image.name | imagine_filter('thumbnail') }}"
+                                  class="img-fluid h-100 w-100 "
+                                  alt="{{ image.description ? image.description : image.title }}"
+                             />
+                             <div class="d-flex justify-content-center flex-column text-center app-mask text-white">
+                                <h4>{{ image.title }}</h4>
+                                 <span>{{ image.description }}</span>
+                             </div>
+                         </a>
+                     </div>
+                 {% endfor %}
+             </div>
+         </div>
+     </div>
+ {% endblock %}

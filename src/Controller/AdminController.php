@@ -3,13 +3,17 @@
 namespace App\Controller;
 
 use App\DataTransformer\BlogPostInputDataTransformer;
+use App\DataTransformer\ImageInputDataTransformer;
 use App\Entity\BlogPost;
 use App\Entity\User;
 use App\Form\BlogPostType;
+use App\Form\ImageType;
 use App\Models\Filter;
 use App\Models\Input\BlogPostInput;
+use App\Models\Input\ImageInput;
 use App\Models\Pagination;
 use App\Repository\BlogPostRepository;
+use App\Repository\ImageRepository;
 use App\Service\PaginationManager;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -123,6 +127,56 @@ final class AdminController extends AbstractController
         return $this->render(
             'admin/blog_post_create_edit.html.twig',
             ['form' => $form->createView(), 'blogPost' => $blogPost]
+        );
+    }
+
+    #[Route(path: '/images', name: 'app_admin_image_manage')]
+    public function imageManage(ImageRepository   $imageRepository,
+                                PaginationManager $paginationManager,
+                                Request           $request): Response
+    {
+        /** @var string $route */
+        $route = $request->attributes->get('_route');
+
+        $pagination = $paginationManager->generate(
+            queryBuilder: $imageRepository->createImageQueryBuilder(),
+            routeName: $route,
+            page: $request->query->getInt('page', 1),
+            itemsPerPage: $request->query->getInt('itemsPerPage', PaginationManager::DEFAULT_ITEMS_PER_PAGE),
+        );
+
+        return $this->render(
+            'admin/image_manage.html.twig', [
+                'pagination' => $pagination,
+            ]
+        );
+    }
+
+    #[Route(path: '/images/create', name: 'app_admin_image_create')]
+    public function imageCreate(Request                   $request,
+                                EntityManagerInterface    $em,
+                                ImageInputDataTransformer $inputDataTransformer): Response
+    {
+        $form = $this->createForm(ImageType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var ImageInput $data */
+            $data = $form->getData();
+
+            $image = $inputDataTransformer->createImage($data);
+
+            $em->persist($image);
+            $em->flush();
+
+            return $this->redirectToRoute('app_admin_image_manage');
+        }
+
+        return $this->render(
+            'admin/image_create_edit.html.twig', [
+                'form' => $form->createView(),
+                'image' => null,
+            ]
         );
     }
 }

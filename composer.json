@@ -14,6 +14,8 @@
         "doctrine/orm": "^2.13",
         "knplabs/knp-time-bundle": "^1.19",
         "league/commonmark": "^2.3",
+        "league/flysystem-bundle": "^3.0",
+        "liip/imagine-bundle": "^2.8",
         "pagerfanta/doctrine-orm-adapter": "^3.6",
         "pagerfanta/twig": "^3.6",
         "sensio/framework-extra-bundle": "^6.2",
@@ -34,7 +36,8 @@
         "twig/extra-bundle": "^3.4",
         "twig/intl-extra": "^3.4",
         "twig/markdown-extra": "^3.4",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "vich/uploader-bundle": "^1.21"
     },
     "config": {
         "allow-plugins": {

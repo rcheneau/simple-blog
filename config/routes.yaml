@@ -8,3 +8,7 @@ controllers:
 home_controller:
     resource: ../src/Controller/HomeController.php
     type: attribute
+
+image_controller:
+    resource: ../src/Controller/ImageController.php
+    type: attribute

@@ -11,6 +11,13 @@
                 <a href="{{ path('app_admin_blog_post_manage') }}" class="stretched-link"></a>
             </div>
         </div>
+        <div class="col">
+            <div class="alert alert-primary shadow" role="alert">
+                <i class="fa-solid fa-image"></i>
+                {{ 'tile.admin.manage_images' | trans }}
+                <a href="{{ path('app_admin_image_manage') }}" class="stretched-link"></a>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

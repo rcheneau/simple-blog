@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'route.name.admin.image_manage' | trans({}, 'routes') }}{% endblock %}
+
+ {% block body %}
+     <div class="card shadow">
+         <div class="card-body">
+             {{ form_start(form) }}
+             {{ form_widget(form) }}
+             <div class="d-flex justify-content-end">
+                 <button type="submit" class="btn btn-primary">
+                     {{ (image ? 'btn.update' : 'btn.create') | trans }}
+                 </button>
+             </div>
+
+             {{ form_end(form) }}
+         </div>
+     </div>
+ {% endblock %}

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Form;
 
-use App\Form\BlogPostType;
+use App\Form\ImageType;
 use App\Models\Input\BlogPostInput;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
@@ -20,7 +20,7 @@ final class BlogPostTypeTest extends TypeTestCase
         ];
 
         $model = new BlogPostInput();
-        $form  = $this->factory->create(BlogPostType::class, $model);
+        $form  = $this->factory->create(ImageType::class, $model);
         $form->submit($formData);
 
         $this->assertTrue($form->isSynchronized());
@@ -37,14 +37,14 @@ final class BlogPostTypeTest extends TypeTestCase
         $formData = [
             'content' => 'My content...',
         ];
-        $form  = $this->factory->create(BlogPostType::class);
+        $form  = $this->factory->create(ImageType::class);
         $form->submit($formData);
         $this->assertFalse($form->isValid());
 
         $formData = [
             'title' => 'My title',
         ];
-        $form  = $this->factory->create(BlogPostType::class);
+        $form  = $this->factory->create(ImageType::class);
         $form->submit($formData);
         $this->assertFalse($form->isValid());
 
@@ -53,7 +53,7 @@ final class BlogPostTypeTest extends TypeTestCase
             'content' => [],
         ];
 
-        $form  = $this->factory->create(BlogPostType::class);
+        $form  = $this->factory->create(ImageType::class);
         $form->submit($formData);
         $this->assertFalse($form->isValid());
     }

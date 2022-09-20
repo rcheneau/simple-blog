@@ -26,3 +26,8 @@ datatable.search.placeholder.title: Rechercher un titre...
 datatable.search.placeholder.author: Rechercher un auteur...
 
 tile.admin.manage_blog_posts: Gestion des articles
+tile.admin.manage_images: Gestion des images
+
+image.file: Fichier image
+image.title: Titre
+image.description: Description
