@@ -9,5 +9,6 @@ route.name.admin.blog_post_create: Créer un article
 route.name.admin.blog_post_edit: Modifier article
 route.name.admin.image_manage: Gestion des images
 route.name.admin.image_create: Ajouter une image
+route.name.image.gallery: Gallerie
 
 route.admin: Admin
