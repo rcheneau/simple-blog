@@ -6,9 +6,7 @@ namespace App\Tests\Form;
 
 use App\Form\ImageType;
 use App\Models\Input\ImageInput;
-use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\PreloadedExtension;
-use Symfony\Component\Validator\Validation;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Vich\UploaderBundle\Handler\UploadHandler;
 use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
