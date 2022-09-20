@@ -9,9 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Vich\UploaderBundle\Handler\DownloadHandler;
 
 #[Route(path: '/images', name: 'app_image_')]
-final class ImageController extends AbstractController
+final class ImageDownloadController extends AbstractController
 {
-    #[Route(path: '/{id}', name: 'download')]
+    #[Route(path: '/download/{id}', name: 'download')]
     public function download(Image $image, DownloadHandler $downloadHandler): Response
     {
         return $downloadHandler->downloadObject($image, 'file', null, $image->getOriginalName(), false);

@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Form;
 
-use App\Entity\BlogPost;
 use App\Form\BlogPostType;
-use App\Form\ImageType;
 use App\Models\Input\BlogPostInput;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
-use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\Validator\Validation;
 
-final class BlogPostTypeTest extends TypeTestCase
+final class BlogPostTypeTest extends AbstractTypeTest
 {
     public function testSubmitValidData()
     {
