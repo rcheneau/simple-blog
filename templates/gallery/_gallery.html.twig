@@ -1,5 +1,5 @@
-<div {{ stimulus_controller('reload-content') }}
-        {{ stimulus_action('reload-content', 'reload', 'dt-paginate:goTo') }}
+<div {{ stimulus_controller('reload-content') | stimulus_controller('confirm-delete') }}
+        {{ stimulus_action('reload-content', 'reload', 'reload') }}
 >
     <div class="row g-0 app-gallery">
         {% for image in pagination.pager %}

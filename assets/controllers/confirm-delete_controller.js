@@ -10,7 +10,7 @@ export default class extends Controller {
     csrfToken = null;
 
     connect() {
-        useDispatch(this);
+        useDispatch(this, {eventPrefix: false});
     }
 
     confirmDelete(event) {
@@ -37,7 +37,7 @@ export default class extends Controller {
             console.error(res.statusText);
         }
 
-        this.dispatch('deleted', {
+        this.dispatch('reload', {
             url: window.location.href,
         });
     }

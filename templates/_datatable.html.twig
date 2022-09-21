@@ -1,8 +1,6 @@
 <div class="table-responsive"
         {{ stimulus_controller('reload-content') | stimulus_controller('confirm-delete') }}
-        {{ stimulus_action('reload-content', 'reload', 'dt-paginate:goTo')
-        | stimulus_action('reload-content', 'reload', 'dt-filter:search')
-        | stimulus_action('reload-content', 'reload', 'confirm-delete:deleted') }}
+        {{ stimulus_action('reload-content', 'reload', 'reload') }}
 >
     {% include '_confirm_delete_modal.html.twig' %}
 

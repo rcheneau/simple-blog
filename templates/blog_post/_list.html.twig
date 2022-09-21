@@ -1,5 +1,5 @@
 <div {{ stimulus_controller('reload-content') }}
-        {{ stimulus_action('reload-content', 'reload', 'dt-paginate:goTo') }}
+        {{ stimulus_action('reload-content', 'reload', 'reload') }}
 >
     <div class="d-flex justify-content-end">
         <span class="text-muted">{{ 'listing.count' | trans({'count': pagination.pager.count}) }}</span>
