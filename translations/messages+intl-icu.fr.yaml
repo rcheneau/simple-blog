@@ -1,7 +1,10 @@
 btn.read: Lire
 btn.create: Créer
 btn.update: Mettre-à-jour
+btn.delete: Supprimer
 btn.edit: Éditer
+btn.confirm: Confirmer
+btn.cancel: Annuler
 
 listing.count: >-
     {count, plural,
@@ -13,6 +16,9 @@ form.title.please_sign_in: Veuillez vous identifier
 form.label.email: Email
 form.label.password: Mot de passe
 form.submit.sign_in: Connexion
+
+modal.confirm_delete.title: Confirmer la supression
+modal.image.confirm_delete: Confirmer la suppression de l'image "{title}" ?
 
 blog_post.title: Titre
 blog_post.content: Contenu

@@ -1,8 +1,11 @@
 <div class="table-responsive"
-        {{ stimulus_controller('reload-content') }}
+        {{ stimulus_controller('reload-content') | stimulus_controller('confirm-delete') }}
         {{ stimulus_action('reload-content', 'reload', 'dt-paginate:goTo')
-        | stimulus_action('reload-content', 'reload', 'dt-filter:search') }}
+        | stimulus_action('reload-content', 'reload', 'dt-filter:search')
+        | stimulus_action('reload-content', 'reload', 'confirm-delete:deleted') }}
 >
+    {% include '_confirm_delete_modal.html.twig' %}
+
     <div class="d-flex justify-content-end">
         <span class="text-muted">{{ 'listing.count' | trans({'count': pagination.pager.count}) }}</span>
     </div>

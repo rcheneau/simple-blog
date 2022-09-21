@@ -1,0 +1,21 @@
+<div class="modal" data-modal-form-target="modal" data-confirm-delete-target="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">{{ 'modal.confirm_delete.title' | trans }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p data-confirm-delete-target="msg"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">
+                    {{ 'btn.cancel' | trans }}
+                </button>
+                <button type="button" class="btn btn-danger text-white" data-action="confirm-delete#delete">
+                    {{ 'btn.confirm' | trans }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

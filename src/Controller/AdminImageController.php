@@ -14,6 +14,7 @@ use App\Service\PaginationManager;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
+use http\Url;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -81,12 +82,24 @@ final class AdminImageController extends AbstractController
     public function imageEdit(Image                     $image,
                               Request                   $request,
                               EntityManagerInterface    $em,
-                              UploadHandler $uploadHandler,
+                              UploadHandler             $uploadHandler,
                               ImageInputDataTransformer $inputDataTransformer): Response
     {
         $uploadHandler->inject($image, 'file');
 
         return $this->handleImageForm($request, $inputDataTransformer, $em, $image);
+    }
+
+    #[Route(path: '/images/delete/{id}', name: 'delete', methods: Request::METHOD_POST)]
+    public function deleteImage(Image $image, EntityManagerInterface $em, Request $request): Response
+    {
+        if (false && $this->isCsrfTokenValid('delete-image-' . $image->getId()->toRfc4122(), $request->headers->get('X-CSRF-Token'))) {
+            $em->remove($image);
+            $em->flush();
+            return new Response(null, 204);
+        }
+
+        return new Response(null, 403);
     }
 
     private function handleImageForm(Request                   $request,

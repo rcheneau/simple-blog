@@ -29,7 +29,7 @@ class AdminImageControllerTest extends AbstractControllerTest
         $this->login($client);
 
         $path = __DIR__ . '/../../src/DataFixture/assets';
-        $image =  current(array_diff(scandir(__DIR__ . '/../../src/DataFixture/assets'), ['.', '..']));
+        $image = current(array_diff(scandir(__DIR__ . '/../../src/DataFixture/assets'), ['.', '..']));
         $uploadedFile = new UploadedFile(
             "$path/$image",
             $image
@@ -82,5 +82,36 @@ class AdminImageControllerTest extends AbstractControllerTest
         $this->assertEquals('Updated description', $updatedImage->getDescription());
         $this->assertEquals($loggedUser->getId(), $updatedImage->getUpdatedBy()->getId());
         $this->assertEquals($updatedImage->getUpdatedAt()->format('Y-m-d'), (new DateTimeImmutable())->format('Y-m-d'));
+    }
+
+    public function testAdminDeleteImage()
+    {
+        $client = static::createClient();
+
+        $this->login($client);
+
+        /** @var ImageRepository $imageRepository */
+        $imageRepository = static::getContainer()->get(ImageRepository::class);
+        $count = $imageRepository->count([]);
+
+        $crawler = $client->request('GET', '/fr/admin/images');
+
+        $deleteLink = $crawler->filter('div.table-responsive table.table a[title=Supprimer]')->first();
+
+        $token = $deleteLink->attr('data-csrf-token');
+        $uuid = basename($deleteLink->attr('href'));
+
+        $image = $imageRepository->find($uuid);
+        $this->assertNotNull($image);
+        $client->request('POST', "/fr/admin/images/delete/$uuid");
+        $this->assertResponseStatusCodeSame(403);
+
+        $client->xmlHttpRequest('POST', "/fr/admin/images/delete/$uuid", [], [], [
+            'HTTP_X_CSRF_Token' => $token,
+        ]);
+
+        $this->assertResponseStatusCodeSame(204);
+        $this->assertNull($imageRepository->find($uuid));
+        $this->assertEquals($count-1, $imageRepository->count([]));
     }
 }
