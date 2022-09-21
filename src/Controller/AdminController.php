@@ -143,6 +143,8 @@ final class AdminController extends AbstractController
             routeName: $route,
             page: $request->query->getInt('page', 1),
             itemsPerPage: $request->query->getInt('itemsPerPage', 12),
+            sortField:    'image.createdAt',
+            sortOrder:    Pagination::SORT_DIRECTION_DESC,
         );
 
         return $this->render(

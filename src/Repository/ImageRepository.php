@@ -42,6 +42,6 @@ class ImageRepository extends ServiceEntityRepository
 
     public function createImageQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('gallery');
+        return $this->createQueryBuilder('image');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Image;
+use App\Models\Pagination;
 use App\Repository\ImageRepository;
 use App\Service\PaginationManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,6 +27,8 @@ final class GalleryController extends AbstractController
             routeName: $route,
             page: $request->query->getInt('page', 1),
             itemsPerPage: 12,
+            sortField:    'image.createdAt',
+            sortOrder:    Pagination::SORT_DIRECTION_DESC,
         );
 
         return $this->render(
