@@ -21,7 +21,7 @@ app.breadcrumb:
         text: route.name.admin
 
     app_admin_blog_post_manage:
-        parent: app_admin
+        parent: app_admin_home
         text: route.name.admin.blog_post_manage
 
     app_admin_blog_post_create:
@@ -35,9 +35,15 @@ app.breadcrumb:
             slug: '{blogPost.slug}'
 
     app_admin_image_manage:
-        parent: app_admin
+        parent: app_admin_home
         text: route.name.admin.image_manage
 
     app_admin_image_create:
         parent: app_admin_image_manage
         text: route.name.admin.image_create
+
+    app_admin_image_edit:
+        text: '{image.title}'
+        parent: app_admin_image_manage
+        params:
+            id: '{image.id}'
