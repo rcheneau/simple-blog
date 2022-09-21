@@ -7,6 +7,7 @@ namespace App\Tests\Form;
 use App\Form\ImageType;
 use App\Models\Input\ImageInput;
 use Symfony\Component\Form\PreloadedExtension;
+use Symfony\Component\Routing\RouterInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Vich\UploaderBundle\Handler\UploadHandler;
 use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
@@ -22,6 +23,7 @@ final class ImageTypeTest extends AbstractTypeTest
     private StorageInterface $storage;
     private UploadHandler $uploadHandler;
     private PropertyMappingFactory $propertyMappingFactory;
+    private RouterInterface $router;
 
     protected function setUp(): void
     {
@@ -29,6 +31,7 @@ final class ImageTypeTest extends AbstractTypeTest
         $this->storage = $this->createMock(StorageInterface::class);
         $this->uploadHandler = $this->createMock(UploadHandler::class);
         $this->propertyMappingFactory = $this->createMock(PropertyMappingFactory::class);
+        $this->router = $this->createMock(RouterInterface::class);
         parent::setUp();
     }
 
@@ -56,13 +59,15 @@ final class ImageTypeTest extends AbstractTypeTest
 
     protected function getExtensions(): array
     {
-
-
         return [
             ...parent::getExtensions(),
-            new PreloadedExtension([
-                new VichImageType($this->storage, $this->uploadHandler, $this->propertyMappingFactory),
-            ], []),
+            new PreloadedExtension(
+                [
+                    new VichImageType($this->storage, $this->uploadHandler, $this->propertyMappingFactory),
+                    new ImageType($this->router),
+                ],
+                []
+            ),
         ];
     }
 }

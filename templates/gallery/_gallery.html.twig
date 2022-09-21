@@ -5,7 +5,7 @@
         {% for image in pagination.pager %}
             <div class="col-12 col-md-6 col-lg-4 app-zoom-on-hover">
                 <a href="{{ path('app_image_download', {id: image.id}) }}" class="position-relative d-block">
-                    <img src="{{ image.name | imagine_filter('thumbnail') }}"
+                    <img src="{{ image.name | imagine_filter('image_500_500') }}"
                          class="img-fluid h-100 w-100 "
                          alt="{{ image.alt }}"
                     />

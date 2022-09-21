@@ -13,6 +13,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * Use VichUploader to handle image upload.
  * Because of this most entity's attributes is set by a listener and cannot be initialized in controller.
+ * These set methods (see @Vich\UploadableField above file field for list) must also accept null on their setter
+ * because Vich will call erase methods to set them at null temporarily on image file update.
  */
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 #[Vich\Uploadable]
@@ -97,9 +99,9 @@ class Image
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
-        $this->name = $name;
+        $this->name = $name ?? '';
 
         return $this;
     }
@@ -109,9 +111,9 @@ class Image
         return $this->originalName;
     }
 
-    public function setOriginalName(string $originalName): self
+    public function setOriginalName(?string $originalName): self
     {
-        $this->originalName = $originalName;
+        $this->originalName = $originalName ?? '';
 
         return $this;
     }
@@ -122,9 +124,9 @@ class Image
     }
 
 
-    public function setSize(int $size): self
+    public function setSize(?int $size): self
     {
-        $this->size = $size;
+        $this->size = $size ?? 0;
 
         return $this;
     }
@@ -135,9 +137,9 @@ class Image
     }
 
 
-    public function setMimeType(string $mimeType): self
+    public function setMimeType(?string $mimeType): self
     {
-        $this->mimeType = $mimeType;
+        $this->mimeType = $mimeType ?? '';
 
         return $this;
     }
@@ -154,9 +156,9 @@ class Image
      * @param int[] $dimensions
      * @return $this
      */
-    public function setDimensions(array $dimensions): self
+    public function setDimensions(?array $dimensions): self
     {
-        $this->dimensions = $dimensions;
+        $this->dimensions = $dimensions ?? [0, 0];
 
         return $this;
     }
@@ -194,9 +196,23 @@ class Image
         return $this->title;
     }
 
+    public function updateTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
     public function getDescription(): string
     {
         return $this->description ?? '';
+    }
+
+    public function updateDescription(?string $description): self
+    {
+        $this->description = $description === '' ? null : $description;
+
+        return $this;
     }
 
     public function getAlt(): string

@@ -3,18 +3,22 @@
 namespace App\Controller;
 
 use App\DataTransformer\ImageInputDataTransformer;
+use App\Entity\Image;
+use App\Entity\User;
 use App\Form\ImageType;
 use App\Models\Filter;
 use App\Models\Input\ImageInput;
 use App\Models\Pagination;
 use App\Repository\ImageRepository;
 use App\Service\PaginationManager;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Vich\UploaderBundle\Handler\UploadHandler;
 
 #[Route('/admin', name: 'app_admin_image_')]
 final class AdminImageController extends AbstractController
@@ -70,14 +74,41 @@ final class AdminImageController extends AbstractController
                                 EntityManagerInterface    $em,
                                 ImageInputDataTransformer $inputDataTransformer): Response
     {
-        $form = $this->createForm(ImageType::class);
+        return $this->handleImageForm($request, $inputDataTransformer, $em);
+    }
+
+    #[Route(path: '/images/edit/{id}', name: 'edit')]
+    public function imageEdit(Image                     $image,
+                              Request                   $request,
+                              EntityManagerInterface    $em,
+                              UploadHandler $uploadHandler,
+                              ImageInputDataTransformer $inputDataTransformer): Response
+    {
+        $uploadHandler->inject($image, 'file');
+
+        return $this->handleImageForm($request, $inputDataTransformer, $em, $image);
+    }
+
+    private function handleImageForm(Request                   $request,
+                                     ImageInputDataTransformer $dataTransformer,
+                                     EntityManagerInterface    $em,
+                                     ?Image                    $image = null): Response
+    {
+        $form = $this->createForm(ImageType::class, $image ? $dataTransformer->transforms($image) : null);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var ImageInput $data */
             $data = $form->getData();
 
-            $image = $inputDataTransformer->createImage($data);
+            if ($image) {
+                /** @var User $user */
+                $user = $this->getUser();
+                $data->updateImage($image);
+                $image->updatedByAt($user, new DateTimeImmutable());
+            } else {
+                $image = $dataTransformer->createImage($data);
+            }
 
             $em->persist($image);
             $em->flush();
@@ -86,10 +117,8 @@ final class AdminImageController extends AbstractController
         }
 
         return $this->render(
-            'admin/image_create_edit.html.twig', [
-                'form' => $form->createView(),
-                'image' => null,
-            ]
+            'admin/image_create_edit.html.twig',
+            ['form' => $form->createView(), 'image' => $image]
         );
     }
 }

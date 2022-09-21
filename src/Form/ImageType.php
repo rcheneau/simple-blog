@@ -9,16 +9,31 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Routing\RouterInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 final class ImageType extends AbstractType
 {
+    private RouterInterface $router;
+
+    public function __construct(RouterInterface $router)
+    {
+        $this->router = $router;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        /** @var ImageInput|null $data */
+        $data = $options['data'] ?? null;
+
         $builder
             ->add('file', VichImageType::class, [
                 'label' => 'image.file',
-                'required' => true,
+                'required' => $data === null,
+                'download_uri' =>   $data && $data->id
+                    ? $this->router->generate('app_image_download', ['id' => $data->id->toRfc4122()])
+                    : false,
+                'imagine_pattern' => 'image_500_500',
             ])
             ->add('title', TextType::class, [
                 'label' => 'image.title',

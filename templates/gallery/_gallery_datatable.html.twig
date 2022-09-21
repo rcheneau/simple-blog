@@ -40,7 +40,7 @@
     {% for image in pagination.pager %}
         <tr>
             <td>
-                <img src="{{ image.name | imagine_filter('thumbnail') }}"
+                <img src="{{ image.name | imagine_filter('image_500_500') }}"
                      height="50"
                      width="50"
                      alt="{{ image.alt }}"
@@ -51,7 +51,13 @@
             <td>{{ image.createdBy.username }}</td>
             <td>{{ image.createdAt | date('Y-m-d') }}</td>
             <td class="text-nowrap">
-
+                <a href="{{ path('app_admin_image_edit', {'id': image.id}) }}"
+                   class="text-decoration-none"
+                   aria-label="{{ 'btn.edit' | trans }}"
+                   title="{{ 'btn.edit' | trans }}"
+                >
+                    <i class="fa-solid fa-pen"></i>
+                </a>
             </td>
         </tr>
     {% endfor %}
