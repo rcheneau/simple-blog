@@ -24,6 +24,7 @@ blog_post.updated_by: Updated by
 datatable.no_data: No data
 datatable.search.placeholder.title: Search title...
 datatable.search.placeholder.author: Search author...
+datatable.search.placeholder.creator: Search creator...
 
 tile.admin.manage_blog_posts: Manage blog posts
 tile.admin.manage_images: Manage images
@@ -31,5 +32,7 @@ tile.admin.manage_images: Manage images
 image.file: Image file
 image.title: Title
 image.description: Description
+image.uploaded_by: Added by
+image.uploaded_at: Added at
 
 gallery.no_images: No image

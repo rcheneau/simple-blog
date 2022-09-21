@@ -6,12 +6,12 @@
      <div class="card shadow">
          <div class="card-body">
              <a href="{{ path('app_admin_image_create') }}"
-                class="btn btn-primary shadow mb-5"
+                class="btn btn-primary shadow mb-3"
              >
                  {{ 'btn.create' | trans }}
              </a>
 
-             {% include 'gallery/_gallery.html.twig' %}
+             {% include 'gallery/_gallery_datatable.html.twig' %}
          </div>
      </div>
  {% endblock %}

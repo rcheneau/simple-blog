@@ -24,10 +24,12 @@ final class ImageType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'image.title',
                 'required' => true,
+                'attr' => ['maxlength' => 25],
             ])
             ->add('description', TextType::class, [
                 'label' => 'image.description',
                 'required' => false,
+                'attr' => ['maxlength' => 100],
             ]);
     }
 

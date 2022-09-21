@@ -138,17 +138,37 @@ final class AdminController extends AbstractController
         /** @var string $route */
         $route = $request->attributes->get('_route');
 
+        $filters = [
+            'title' => new Filter(
+                'image.title',
+                fn(QueryBuilder $qb, $v) => $qb->andWhere('LOWER(image.title) LIKE :title')
+                    ->setParameter('title', '%' . strtolower($v) . '%')
+            ),
+            'createdBy' => new Filter(
+                'createdBy.username',
+                fn(QueryBuilder $qb, $v) => $qb->andWhere('createdBy.username LIKE :username')
+                    ->setParameter('username', "%$v%")
+            ),
+        ];
+
         $pagination = $paginationManager->generate(
             queryBuilder: $imageRepository->createImageQueryBuilder(),
             routeName: $route,
             page: $request->query->getInt('page', 1),
             itemsPerPage: $request->query->getInt('itemsPerPage', 12),
-            sortField: 'image.createdAt',
-            sortOrder: Pagination::SORT_DIRECTION_DESC,
+            sortField: (string)$request->query->get('sort', 'createdAt'),
+            sortOrder: $request->query->getAlpha('direction', Pagination::SORT_DIRECTION_DESC),
+            sortFieldsWhitelist: [
+                'createdAt' => 'image.createdAt',
+                'createdBy' => 'createdBy.username',
+            ],
+            filters: $filters,
+            filterValues: $request->query->all('search'),
+            routeParams: $request->query->getIterator()->getArrayCopy(),
         );
 
         return $this->render(
-            $request->isXmlHttpRequest() ? 'gallery/_gallery.html.twig' : 'admin/image_manage.html.twig',
+            $request->isXmlHttpRequest() ? 'gallery/_gallery_datatable.html.twig' : 'admin/image_manage.html.twig',
             [
                 'pagination' => $pagination,
                 'ajaxMode' => true,

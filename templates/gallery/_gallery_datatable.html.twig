@@ -1,0 +1,49 @@
+{% extends '_datatable.html.twig' %}
+
+{% block titles %}
+    <th scope="col">{{ 'image.title' | trans }}</th>
+    <th scope="col">{{ 'image.description' | trans }}</th>
+    <th scope="col">
+        {{ pagination_sortable(pagination, 'image.uploaded_by' | trans, 'createdBy', ajaxMode) }}
+    </th>
+    <th scope="col">
+        {{ pagination_sortable(pagination, 'image.uploaded_at' | trans, 'createdAt', ajaxMode) }}
+    </th>
+    <th scope="col"></th>
+{% endblock %}
+
+{% block filters %}
+    <th>
+        {{ pagination_filterable(
+            pagination,
+            'image.title' | trans,
+            'title',
+            'datatable.search.placeholder.title' | trans
+        ) }}
+    </th>
+    <th></th>
+    <th>
+        {{ pagination_filterable(
+            pagination,
+            'image.uploaded_by' | trans,
+            'createdBy',
+            'datatable.search.placeholder.creator' | trans
+        ) }}
+    </th>
+    <th></th>
+    <th></th>
+{% endblock %}
+
+{% block body %}
+    {% for image in pagination.pager %}
+        <tr>
+            <td>{{ image.title }}</td>
+            <td>{{ image.description }}</td>
+            <td>{{ image.createdBy.username }}</td>
+            <td>{{ image.createdAt | date('Y-m-d') }}</td>
+            <td class="text-nowrap">
+
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}

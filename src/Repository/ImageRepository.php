@@ -42,6 +42,8 @@ class ImageRepository extends ServiceEntityRepository
 
     public function createImageQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('image');
+        return $this->createQueryBuilder('image')
+            ->addSelect('createdBy')
+            ->leftJoin('image.createdBy', 'createdBy');
     }
 }
