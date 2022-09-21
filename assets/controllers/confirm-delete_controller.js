@@ -33,11 +33,12 @@ export default class extends Controller {
             headers: {'X-Requested-with': 'XMLHttpRequest', 'X-CSRF-Token': this.csrfToken},
         });
 
-        if (res.status === 204) {
-            this.dispatch('deleted', {
-                url: window.location.href,
-            });
+        if(res.status !== 204) {
+            console.error(res.statusText);
         }
-        console.error(res.statusText)
+
+        this.dispatch('deleted', {
+            url: window.location.href,
+        });
     }
 }
