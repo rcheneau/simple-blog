@@ -2,7 +2,6 @@
 
 namespace App\Tests\Controller;
 
-use App\DataFixture\ImageProcessor;
 use App\Repository\BlogPostRepository;
 use App\Repository\ImageRepository;
 use DateTimeImmutable;
