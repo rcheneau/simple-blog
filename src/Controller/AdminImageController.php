@@ -14,7 +14,6 @@ use App\Service\PaginationManager;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
-use http\Url;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -93,7 +92,7 @@ final class AdminImageController extends AbstractController
     #[Route(path: '/images/delete/{id}', name: 'delete', methods: Request::METHOD_POST)]
     public function deleteImage(Image $image, EntityManagerInterface $em, Request $request): Response
     {
-        if (false && $this->isCsrfTokenValid('delete-image-' . $image->getId()->toRfc4122(), $request->headers->get('X-CSRF-Token'))) {
+        if ($this->isCsrfTokenValid('delete-image-' . $image->getId()->toRfc4122(), $request->headers->get('X-CSRF-Token'))) {
             $em->remove($image);
             $em->flush();
             return new Response(null, 204);
