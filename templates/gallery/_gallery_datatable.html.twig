@@ -1,6 +1,7 @@
 {% extends '_datatable.html.twig' %}
 
 {% block titles %}
+    <th scope="col"></th>
     <th scope="col">{{ 'image.title' | trans }}</th>
     <th scope="col">{{ 'image.description' | trans }}</th>
     <th scope="col">
@@ -13,6 +14,7 @@
 {% endblock %}
 
 {% block filters %}
+    <th></th>
     <th>
         {{ pagination_filterable(
             pagination,
@@ -37,6 +39,13 @@
 {% block body %}
     {% for image in pagination.pager %}
         <tr>
+            <td>
+                <img src="{{ image.name | imagine_filter('thumbnail') }}"
+                     height="50"
+                     width="50"
+                     alt="{{ image.alt }}"
+                />
+            </td>
             <td>{{ image.title }}</td>
             <td>{{ image.description }}</td>
             <td>{{ image.createdBy.username }}</td>
