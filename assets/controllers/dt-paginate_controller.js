@@ -11,6 +11,6 @@ export default class extends Controller {
         e.preventDefault();
         this.dispatch('goTo', {
             url: e.currentTarget.href,
-        })
+        });
     }
 }
