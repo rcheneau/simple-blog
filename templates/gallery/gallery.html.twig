@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'route.name.gallery' | trans({}, 'routes') }}{% endblock %}
+
+ {% block body %}
+     {% include 'gallery/_gallery.html.twig' %}
+ {% endblock %}

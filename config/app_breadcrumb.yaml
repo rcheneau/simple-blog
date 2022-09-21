@@ -8,8 +8,8 @@ app.breadcrumb:
         params:
             slug: '{blogPost.slug}'
 
-    app_image_gallery:
-        text: route.name.image.gallery
+    app_gallery:
+        text: route.name.gallery
 
     app_login:
         text:  route.name.login

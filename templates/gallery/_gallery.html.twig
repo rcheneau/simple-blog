@@ -1,9 +1,9 @@
 <div {{ stimulus_controller('reload-content') }}
         {{ stimulus_action('reload-content', 'reload', 'dt-paginate:goTo') }}
 >
-    <div class="row row-cols-md-2 row-cols-lg-3 g-0 app-gallery">
+    <div class="row g-0 app-gallery">
         {% for image in pagination.pager %}
-            <div class="col app-zoom-on-hover">
+            <div class="col-12 col-md-6 col-lg-4 app-zoom-on-hover">
                 <a href="{{ path('app_image_download', {id: image.id}) }}" class="position-relative d-block">
                     <img src="{{ image.name | imagine_filter('thumbnail') }}"
                          class="img-fluid h-100 w-100 "
@@ -16,6 +16,11 @@
                 </a>
             </div>
         {% endfor %}
+        {% if pagination.pager is empty %}
+            <div class="col-12 text-center">
+                {{ 'gallery.no_images' | trans }}
+            </div>
+        {% endif %}
     </div>
     <div class="d-flex justify-content-center mt-5">
         {{ pagerfanta(pagination.pager, 'app_pagination', {'ajax_mode': ajaxMode}) }}

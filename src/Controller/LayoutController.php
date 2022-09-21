@@ -16,7 +16,7 @@ final class LayoutController extends AbstractController
     {
         $navbarItems = [
             ['text' => 'route.name.home', 'name' => 'app_blog_post_list', 'icon' => 'fa-solid fa-house'],
-            ['text' => 'route.name.image.gallery', 'name' => 'app_image_gallery'],
+            ['text' => 'route.name.gallery', 'name' => 'app_gallery'],
         ];
 
         $userDropdownItems   = [];

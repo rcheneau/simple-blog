@@ -31,3 +31,5 @@ tile.admin.manage_images: Manage images
 image.file: Image file
 image.title: Title
 image.description: Description
+
+gallery.no_images: No image

@@ -11,10 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Vich\UploaderBundle\Handler\DownloadHandler;
 
-#[Route(path: '/images', name: 'app_image_')]
-final class ImageController extends AbstractController
+final class GalleryController extends AbstractController
 {
-    #[Route(path: '/', name: 'gallery')]
+    #[Route(path: '/gallery', name: 'app_gallery')]
     public function gallery(ImageRepository   $imageRepository,
                             PaginationManager $paginationManager,
                             Request           $request): Response
@@ -30,7 +29,7 @@ final class ImageController extends AbstractController
         );
 
         return $this->render(
-            $request->isXmlHttpRequest() ? 'image/_gallery.html.twig' : 'image/gallery.html.twig',
+            $request->isXmlHttpRequest() ? 'gallery/_gallery.html.twig' : 'gallery/gallery.html.twig',
             [
                 'pagination' => $pagination,
                 'ajaxMode' => true,

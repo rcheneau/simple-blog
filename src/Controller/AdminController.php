@@ -142,12 +142,14 @@ final class AdminController extends AbstractController
             queryBuilder: $imageRepository->createImageQueryBuilder(),
             routeName: $route,
             page: $request->query->getInt('page', 1),
-            itemsPerPage: $request->query->getInt('itemsPerPage', PaginationManager::DEFAULT_ITEMS_PER_PAGE),
+            itemsPerPage: $request->query->getInt('itemsPerPage', 12),
         );
 
         return $this->render(
-            'admin/image_manage.html.twig', [
+            $request->isXmlHttpRequest() ? 'gallery/_gallery.html.twig' : 'admin/image_manage.html.twig',
+            [
                 'pagination' => $pagination,
+                'ajaxMode' => true,
             ]
         );
     }

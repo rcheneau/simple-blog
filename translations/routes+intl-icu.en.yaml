@@ -8,7 +8,7 @@ route.name.admin.blog_post_manage: Manage posts
 route.name.admin.blog_post_create: Create post
 route.name.admin.blog_post_edit: Edit post
 route.name.admin.image_manage: Manage images
-route.name.admin.image_create: Add image
-route.name.image.gallery: Gallery
+route.name.admin.image_create: Add gallery
+route.name.gallery: Gallery
 
 route.admin: Admin
