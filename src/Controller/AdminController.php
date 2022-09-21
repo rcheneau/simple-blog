@@ -73,7 +73,7 @@ final class AdminController extends AbstractController
         );
 
         return $this->render(
-            $request->isXmlHttpRequest() ? 'blog_post/_datatable.html.twig' : 'admin/blog_post_manage.html.twig',
+            $request->isXmlHttpRequest() ? 'blog_post/_blog_post_datatable.html.twig' : 'admin/blog_post_manage.html.twig',
             [
                 'pagination' => $pagination,
                 'ajaxMode' => true,
@@ -143,8 +143,8 @@ final class AdminController extends AbstractController
             routeName: $route,
             page: $request->query->getInt('page', 1),
             itemsPerPage: $request->query->getInt('itemsPerPage', 12),
-            sortField:    'image.createdAt',
-            sortOrder:    Pagination::SORT_DIRECTION_DESC,
+            sortField: 'image.createdAt',
+            sortOrder: Pagination::SORT_DIRECTION_DESC,
         );
 
         return $this->render(
