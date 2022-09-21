@@ -7,7 +7,7 @@
                 <a href="{{ path('app_image_download', {id: image.id}) }}" class="position-relative d-block">
                     <img src="{{ image.name | imagine_filter('thumbnail') }}"
                          class="img-fluid h-100 w-100 "
-                         alt="{{ image.description ? image.description : image.title }}"
+                         alt="{{ image.alt }}"
                     />
                     <div class="d-flex justify-content-center flex-column text-center app-mask text-white">
                         <h4>{{ image.title }}</h4>

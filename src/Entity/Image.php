@@ -198,4 +198,9 @@ class Image
     {
         return $this->description ?? '';
     }
+
+    public function getAlt(): string
+    {
+        return $this->description ?? $this->title;
+    }
 }
