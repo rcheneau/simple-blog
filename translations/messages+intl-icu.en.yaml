@@ -19,6 +19,7 @@ form.submit.sign_in: Sign in
 
 modal.confirm_delete.title: Confirm deletion
 modal.image.confirm_delete: Confirm the deletion of the "{title}" image?
+modal.image.deleted: Image has been deleted
 
 blog_post.title: Title
 blog_post.content: Content

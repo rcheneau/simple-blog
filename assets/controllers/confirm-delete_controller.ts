@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 import { Modal } from 'bootstrap';
+import ToastManager, { Type } from "../services/ToastManager";
 
 // noinspection JSUnusedGlobalSymbols
 export default class extends Controller<HTMLElement> {
@@ -10,6 +11,8 @@ export default class extends Controller<HTMLElement> {
     private modal: Modal | null = null;
     private href: string | null = null;
     private csrfToken: string | null = null;
+    private deletedMsg: string | null = null;
+    private toast = new ToastManager();
 
     confirmDelete(event: Event) {
         event.preventDefault();
@@ -20,6 +23,7 @@ export default class extends Controller<HTMLElement> {
 
         this.msgTarget.innerText = event.currentTarget.dataset.msg || '';
         this.csrfToken = event.currentTarget.dataset.csrfToken || '';
+        this.deletedMsg = event.currentTarget.dataset.deletedMsg || '';
 
         this.modal = new Modal(this.modalTarget);
         this.modal.show();
@@ -39,12 +43,13 @@ export default class extends Controller<HTMLElement> {
         });
 
         if (res.status !== 204) {
-            console.error(res.statusText);
+            this.toast.show(res.statusText, Type.error)
         }
 
         this.dispatch('reload', {
             detail: { url: window.location.href },
             prefix: '',
         });
+        this.toast.show(this.deletedMsg || '');
     }
 }

@@ -29,5 +29,9 @@
     {{ render(controller('App\\Controller\\LayoutController::footer')) }}
 </footer>
 
+<div id="toast-container" class="toast-container position-fixed top-0 end-0 p-3" data-toast-tpl="{{ include('_toast.html.twig') | e }}">
+
+</div>
+
 </body>
 </html>
