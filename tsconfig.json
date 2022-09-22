@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "strict": true,
+        "allowJs": true,
+        "module": "es6",
+        "target": "es6",
+        "moduleResolution": "node",
+        "baseUrl": "assets",
+        "typeRoots": ["types"],
+        /*"paths": {
+            "@/*": ["js/*"],
+        }*/
+    }
+}
