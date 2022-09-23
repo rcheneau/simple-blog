@@ -20,6 +20,8 @@ form.submit.sign_in: Connexion
 modal.confirm_delete.title: Confirmer la supression
 modal.image.confirm_delete: Confirmer la suppression de l'image "{title}" ?
 modal.image.deleted: L'image a été supprimée
+modal.blog_post.confirm_delete: Confirmer la suppression de l'article "{title}" ?
+modal.blog_post.deleted: L'article a été supprimé
 
 blog_post.title: Titre
 blog_post.content: Contenu

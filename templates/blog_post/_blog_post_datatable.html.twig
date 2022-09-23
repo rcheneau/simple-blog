@@ -51,6 +51,12 @@
                 {{ include('datatable/_action_edit_link.twig', {
                     url: path('app_admin_blog_post_edit', {'slug': post.slug}),
                 }) }}
+                {{ include('datatable/_action_delete_link.twig', {
+                    url: path('app_admin_blog_post_delete', {'slug': post.slug}),
+                    confirmDeleteMsg: 'modal.blog_post.confirm_delete' | trans({'title': post.title}),
+                    deletedMsg: 'modal.blog_post.deleted' | trans,
+                    csrfToken: csrf_token('delete-post-' ~ post.id.toRfc4122)
+                }) }}
             </td>
         </tr>
     {% endfor %}

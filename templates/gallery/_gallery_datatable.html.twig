@@ -56,7 +56,7 @@
                 }) }}
                 {{ include('datatable/_action_delete_link.twig', {
                     url: path('app_admin_image_delete', {'id': image.id}),
-                    name: image.title,
+                    confirmDeleteMsg: 'modal.image.confirm_delete' | trans({'title': image.title}),
                     deletedMsg: 'modal.image.deleted' | trans,
                     csrfToken: csrf_token('delete-image-' ~ image.id.toRfc4122)
                 }) }}

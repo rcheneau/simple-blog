@@ -2,7 +2,7 @@
    class="text-decoration-none text-danger"
    aria-label="{{ 'btn.delete' | trans }}"
    title="{{ 'btn.delete' | trans }}"
-   data-msg="{{ 'modal.image.confirm_delete' | trans({'title': name}) }}"
+   data-msg="{{ confirmDeleteMsg }}"
    data-deleted-msg="{{ deletedMsg }}"
    data-action="confirm-delete#confirmDelete"
    data-csrf-token="{{ csrfToken }}"

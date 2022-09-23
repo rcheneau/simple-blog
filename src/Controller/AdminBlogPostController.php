@@ -92,6 +92,18 @@ final class AdminBlogPostController extends AbstractController
         return $this->handleBlogPostForm($request, $dataTransformer, $em, $blogPost);
     }
 
+    #[Route(path: '/posts/delete/{slug}', name: 'delete', methods: Request::METHOD_POST)]
+    public function deleteImage(BlogPost $blogPost, EntityManagerInterface $em, Request $request): Response
+    {
+        if ($this->isCsrfTokenValid('delete-post-' . $blogPost->getId()->toRfc4122(), $request->headers->get('X-CSRF-Token'))) {
+            $em->remove($blogPost);
+            $em->flush();
+            return new Response(null, 204);
+        }
+
+        return new Response(null, 403);
+    }
+
     private function handleBlogPostForm(Request                      $request,
                                         BlogPostInputDataTransformer $dataTransformer,
                                         EntityManagerInterface       $em,
