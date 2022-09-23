@@ -38,11 +38,6 @@ jobs:
             -   name: Report PHP version
                 run: php -v
 
-            # PHPStan
-            -   name: Static analysis of PHP code (PHPStan)
-                run: |
-                    php vendor/bin/phpstan analyse -l 9 src
-
             # Yarn
             -   name: Yarn install
                 uses: actions/setup-node@v2
