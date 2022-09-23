@@ -1,0 +1,64 @@
+name: CI
+on:
+    push:
+        branches:
+            - master
+jobs:
+    symfony:
+        runs-on: ubuntu-latest
+        name: Symfony 6.1 (PHP ${{ matrix.php-versions }})
+        strategy:
+            fail-fast: true
+            matrix:
+                php-versions: [ '8.1' ]
+        services:
+            postgres:
+                image: postgres
+                env:
+                    POSTGRES_PASSWORD: postgres
+                options: >-
+                    --health-cmd pg_isready
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 5
+        steps:
+            -   name: 'Checkout'
+                uses: actions/checkout@v2
+
+            -   name: Setup PHP, extensions and composer
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php-versions }}
+                    extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, iconv, json, mbstring
+
+            -   name: Report PHP version
+                run: php -v
+
+            # Yarn
+            -   name: Yarn install
+                uses: actions/setup-node@v2
+                with:
+                    node-version: '18'
+            -   run: yarn install
+            -   name: Yarn build
+                run: yarn run encore production
+
+            # Composer
+            -   name: Validate composer.json and composer.lock
+                run: composer validate --strict
+
+            -   name: Install Composer dependencies
+                run: composer install --no-interaction --no-progress --no-suggest
+
+            # PHPStan
+            -   name: Static analysis of PHP code (PHPStan)
+                run: |
+                    php vendor/bin/phpstan analyse -l 9 src
+
+            ## Tests
+            -   name: Load fixtures
+                run: php bin/console hautelook:fixtures:load --no-interaction
+
+            -   name: Run tests
+                run: |
+                    bin/phpunit
