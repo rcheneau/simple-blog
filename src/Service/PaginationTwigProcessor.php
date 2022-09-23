@@ -9,7 +9,7 @@ use RuntimeException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * Generates parameters needed to render "pagination/_sortable_link.html.twig".
+ * Generates parameters needed to render "datatable/_sortable_link.html.twig".
  */
 final class PaginationTwigProcessor
 {

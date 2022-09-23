@@ -17,7 +17,7 @@ final class PaginationExtension extends AbstractExtension
 {
     private const FILTER_TYPES
         = [
-            'text' => 'pagination/_filter_text.html.twig',
+            'text' => 'datatable/_filter_text.html.twig',
         ];
 
 
@@ -67,7 +67,7 @@ final class PaginationExtension extends AbstractExtension
                              array       $options = []): string
     {
         return $env->render(
-            'pagination/_sortable_link.html.twig',
+            'datatable/_sortable_link.html.twig',
             $this->processor->sortable($pagination, $title, $key, $ajaxMode, $attributes, $options)
         );
     }
