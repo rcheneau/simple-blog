@@ -45,20 +45,12 @@
             <td>{{ post.updatedBy ? post.updatedBy.username : '' }}</td>
             <td>{{ post.updatedAt ? (post.updatedAt | date('Y-m-d')) : '' }}</td>
             <td class="text-nowrap">
-                <a href="{{ path('app_blog_post_item', {'slug': post.slug}) }}"
-                   class="text-decoration-none"
-                   aria-label="{{ 'btn.read' | trans }}"
-                   title="{{ 'btn.read' | trans }}"
-                >
-                    <i class="fa-solid fa-eye"></i>
-                </a>
-                <a href="{{ path('app_admin_blog_post_edit', {'slug': post.slug}) }}"
-                   class="text-decoration-none"
-                   aria-label="{{ 'btn.edit' | trans }}"
-                   title="{{ 'btn.edit' | trans }}"
-                >
-                    <i class="fa-solid fa-pen"></i>
-                </a>
+                {{ include('datatable/_action_view_link.twig', {
+                    url: path('app_blog_post_item', {'slug': post.slug}),
+                }) }}
+                {{ include('datatable/_action_edit_link.twig', {
+                    url: path('app_admin_blog_post_edit', {'slug': post.slug}),
+                }) }}
             </td>
         </tr>
     {% endfor %}

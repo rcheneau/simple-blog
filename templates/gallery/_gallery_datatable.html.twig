@@ -51,24 +51,15 @@
             <td>{{ image.createdBy.username }}</td>
             <td>{{ image.createdAt | date('Y-m-d') }}</td>
             <td class="text-nowrap">
-                <a href="{{ path('app_admin_image_edit', {'id': image.id}) }}"
-                   class="text-decoration-none"
-                   aria-label="{{ 'btn.edit' | trans }}"
-                   title="{{ 'btn.edit' | trans }}"
-                >
-                    <i class="fa-solid fa-pen"></i>
-                </a>
-                <a href="{{ path('app_admin_image_delete', {'id': image.id}) }}"
-                   class="text-decoration-none text-danger"
-                   aria-label="{{ 'btn.delete' | trans }}"
-                   title="{{ 'btn.delete' | trans }}"
-                   data-msg="{{ 'modal.image.confirm_delete' | trans({'title': image.title}) }}"
-                   data-deleted-msg="{{ 'modal.image.deleted' | trans }}"
-                   data-action="confirm-delete#confirmDelete"
-                   data-csrf-token="{{ csrf_token('delete-image-' ~ image.id.toRfc4122) }}"
-                >
-                    <i class="fa-solid fa-trash"></i>
-                </a>
+                {{ include('datatable/_action_edit_link.twig', {
+                    url: path('app_admin_image_edit', {'id': image.id}),
+                }) }}
+                {{ include('datatable/_action_delete_link.twig', {
+                    url: path('app_admin_image_delete', {'id': image.id}),
+                    name: image.title,
+                    deletedMsg: 'modal.image.deleted' | trans,
+                    csrfToken: csrf_token('delete-image-' ~ image.id.toRfc4122)
+                }) }}
             </td>
         </tr>
     {% endfor %}

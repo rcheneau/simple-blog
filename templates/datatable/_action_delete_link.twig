@@ -1,0 +1,11 @@
+<a href="{{ url }}"
+   class="text-decoration-none text-danger"
+   aria-label="{{ 'btn.delete' | trans }}"
+   title="{{ 'btn.delete' | trans }}"
+   data-msg="{{ 'modal.image.confirm_delete' | trans({'title': name}) }}"
+   data-deleted-msg="{{ deletedMsg }}"
+   data-action="confirm-delete#confirmDelete"
+   data-csrf-token="{{ csrfToken }}"
+>
+    <i class="fa-solid fa-trash"></i>
+</a>
