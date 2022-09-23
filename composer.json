@@ -1,6 +1,8 @@
 {
+    "name": "rcheneau/simple-blog",
+    "description": "A simple blog to publish posts in markdown and upload images.",
     "type": "project",
-    "license": "proprietary",
+    "license": "Apache-2.0",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
