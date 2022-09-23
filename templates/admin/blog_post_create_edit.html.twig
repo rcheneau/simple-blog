@@ -33,7 +33,19 @@
              {% endif %}
 
              {{ form_start(form) }}
-             {{ form_widget(form) }}
+
+             {{ form_row(form.title) }}
+
+             <div class="mb-3">
+                 {{ form_label(form.content) }}
+                 {{ form_errors(form.content) }}
+                 <div>
+                     {{ include('_markdown_toolbar.html.twig', { forId: form.content.vars.id }) }}
+                 </div>
+                 {{ form_widget(form.content) }}
+                 {{ form_help(form.content) }}
+             </div>
+
              <div class="d-flex justify-content-end">
                  <button type="submit" class="btn btn-primary">
                      {{ (blogPost ? 'btn.update' : 'btn.create') | trans }}

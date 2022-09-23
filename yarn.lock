@@ -1282,6 +1282,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@github/markdown-toolbar-element@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "@github/markdown-toolbar-element@npm:2.1.1"
+  checksum: ae931fc7743b78c7b31ff885af5226a1ef23a9040f9d606628beaebbed4316e98e7ff8b327c056d1c9923353d532d7ac420db0413557e39c6fb8d7b3720973ee
+  languageName: node
+  linkType: hard
+
 "@hotwired/stimulus-webpack-helpers@npm:^1.0.1":
   version: 1.0.1
   resolution: "@hotwired/stimulus-webpack-helpers@npm:1.0.1"
@@ -5622,6 +5629,7 @@ __metadata:
     "@babel/preset-env": ^7.19.1
     "@fontsource/open-sans": ^4.5.11
     "@fortawesome/fontawesome-free": ^6.2.0
+    "@github/markdown-toolbar-element": ^2.1.1
     "@hotwired/stimulus": ^3.0.0
     "@popperjs/core": ^2.11.6
     "@symfony/stimulus-bridge": ^3.2.0
