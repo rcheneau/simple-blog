@@ -13,9 +13,13 @@ jobs:
                 php-versions: [ '8.1' ]
         services:
             postgres:
-                image: postgres
+                image: postgres:latest
                 env:
+                    POSTGRES_DB: simple_blog
                     POSTGRES_PASSWORD: postgres
+                    POSTGRES_USER: postgres
+                ports:
+                    - 5432:5432
                 options: >-
                     --health-cmd pg_isready
                     --health-interval 10s
@@ -25,14 +29,19 @@ jobs:
             -   name: 'Checkout'
                 uses: actions/checkout@v2
 
+            # Setup PHP
             -   name: Setup PHP, extensions and composer
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: ${{ matrix.php-versions }}
                     extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_pgsql, dom, filter, gd, iconv, json, mbstring
-
             -   name: Report PHP version
                 run: php -v
+
+            # PHPStan
+            -   name: Static analysis of PHP code (PHPStan)
+                run: |
+                    php vendor/bin/phpstan analyse -l 9 src
 
             # Yarn
             -   name: Yarn install
@@ -50,15 +59,16 @@ jobs:
             -   name: Install Composer dependencies
                 run: composer install --no-interaction --no-progress --no-suggest
 
-            # PHPStan
-            -   name: Static analysis of PHP code (PHPStan)
+            -   name: Setup database
                 run: |
-                    php vendor/bin/phpstan analyse -l 9 src
+                    php bin/console doctrine:database:create --env=test
+                    php bin/console doctrine:migrations:migrate --no-interaction --env=test
 
-            ## Tests
+            # Fixtures
             -   name: Load fixtures
-                run: php bin/console hautelook:fixtures:load --no-interaction
+                run: php bin/console hautelook:fixtures:load --no-interaction --env=test
 
+            # Tests
             -   name: Run tests
                 run: |
-                    bin/phpunit
+                    php bin/phpunit
