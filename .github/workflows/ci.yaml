@@ -34,7 +34,7 @@ jobs:
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: ${{ matrix.php-versions }}
-                    extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_pgsql, dom, filter, gd, iconv, json, mbstring
+                    extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_pgsql, dom, filter, gd, iconv, json
             -   name: Report PHP version
                 run: php -v
 
@@ -56,8 +56,7 @@ jobs:
 
             # PHPStan
             -   name: Static analysis of PHP code (PHPStan)
-                run: |
-                    php vendor/bin/phpstan analyse -l 9 src
+                run: php vendor/bin/phpstan analyse -l 9 src
 
             -   name: Setup database
                 run: |
@@ -70,5 +69,4 @@ jobs:
 
             # Tests
             -   name: Run tests
-                run: |
-                    php bin/phpunit
+                run: php bin/phpunit
