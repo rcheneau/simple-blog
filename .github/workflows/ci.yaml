@@ -59,6 +59,11 @@ jobs:
             -   name: Install Composer dependencies
                 run: composer install --no-interaction --no-progress --no-suggest
 
+            # PHPStan
+            -   name: Static analysis of PHP code (PHPStan)
+                run: |
+                    php vendor/bin/phpstan analyse -l 9 src
+
             -   name: Setup database
                 run: |
                     php bin/console doctrine:database:create --env=test
