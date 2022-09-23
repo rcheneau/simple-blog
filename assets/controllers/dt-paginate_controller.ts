@@ -10,7 +10,7 @@ export default class extends Controller<HTMLElement> {
         }
 
         this.dispatch('reload', {
-            detail: { url: event.currentTarget.href },
+            detail: { url: event.currentTarget.href, scrollToTopOfElement: true },
             prefix: '',
         });
     }
