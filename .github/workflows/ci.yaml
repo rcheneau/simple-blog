@@ -114,3 +114,14 @@ jobs:
                     REMOTE_USER: ${{ secrets.REMOTE_USER }}
                     TARGET: ${{ secrets.REMOTE_TARGET }}
                     EXCLUDE: "/.git, /.github, /.idea, /.php-version, /.yarn, /fixtures, /node_modules, /scripts, /tests, /var, /.env, /.env.local, /.env.test, /.gitignore, /.phpversion, /.phpunit.result.cache, /.yarnrc.yml, /composer.json, /composer.lock, /package.json, /phpunit.xml.dist, /symfony.lock, /tsconfig.json, /webpack.config.js, /yarn.lock"
+
+            -   name: executing remote ssh commands using ssh key
+                uses: appleboy/ssh-action@master
+                with:
+                    host: ${{ secrets.REMOTE_HOST }}
+                    username: ${{ secrets.REMOTE_USER }}
+                    key: ${{ secrets.SSH_PRIVATE_KEY2 }}
+                    port: ${{ secrets.REMOTE_PORT }}
+                    script: |
+                        whoami
+                        ls -al
