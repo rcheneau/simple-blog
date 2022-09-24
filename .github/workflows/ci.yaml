@@ -6,7 +6,7 @@ on:
 jobs:
     tests:
         runs-on: ubuntu-latest
-        name: Symfony 6.1 (PHP ${{ matrix.php-versions }})
+        name: Tests
         strategy:
             fail-fast: true
             matrix:
@@ -73,6 +73,7 @@ jobs:
 
     deploy:
         runs-on: ubuntu-latest
+        name: Deployment
         environment: production
         env:
             APP_ENV: prod
