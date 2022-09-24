@@ -74,14 +74,41 @@ jobs:
     deploy:
         runs-on: ubuntu-latest
         environment: production
+        strategy:
+            fail-fast: true
+            matrix:
+                php-versions: [ '8.1' ]
         steps:
-            -   name: Deploy to Staging server
+
+            -   name: 'Checkout'
+                uses: actions/checkout@v2
+
+            -   name: Setup PHP, extensions and composer
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php-versions }}
+                    extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_pgsql, dom, filter, gd, iconv, json
+            -   name: Report PHP version
+                run: php -v
+
+            -   name: Install Composer dependencies
+                run: composer install --no-dev --optimize-autoloader
+
+            -   name: Yarn install
+                uses: actions/setup-node@v2
+                with:
+                    node-version: '18'
+            -   run: yarn install
+            -   name: Yarn build
+                run: yarn run encore production
+
+            -   name: Deploy to Prod server
                 uses: easingthemes/ssh-deploy@main
                 env:
-                  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-                  SOURCE: '.'
-                  REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-                  REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-                  REMOTE_USER: ${{ secrets.REMOTE_USER }}
-                  TARGET: ${{ secrets.REMOTE_TARGET }}
-                  EXCLUDE: 'vendor/, node_modules/, var/, .env.local/, .git, .yarn'
+                    SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+                    SOURCE: 'dist/'
+                    REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+                    REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+                    REMOTE_USER: ${{ secrets.REMOTE_USER }}
+                    TARGET: ${{ secrets.REMOTE_TARGET }}
+                    EXCLUDE: "/dist/, /node_modules/"
