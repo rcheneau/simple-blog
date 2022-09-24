@@ -1,9 +1,15 @@
 <div {{ stimulus_controller('reload-content') }}
         {{ stimulus_action('reload-content', 'reload', 'reload') }}
 >
-    <div class="d-flex justify-content-end">
-        <span class="text-muted">{{ 'listing.count' | trans({'count': pagination.pager.count}) }}</span>
-    </div>
+    {% if pagination.pager.count != 0 %}
+        <div class="d-flex justify-content-end">
+            <span class="text-muted">{{ 'listing.count' | trans({'count': pagination.pager.count}) }}</span>
+        </div>
+    {% else %}
+        <div class="d-flex justify-content-center">
+            <span class="text-muted">{{ 'datatable.no_data' | trans }}</span>
+        </div>
+    {% endif %}
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
         {% for post in pagination.pager %}
             <div class="col">
