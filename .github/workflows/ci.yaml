@@ -75,11 +75,12 @@ jobs:
         runs-on: ubuntu-latest
         environment: production
         steps:
-            -   name: executing remote ssh commands using password
-                uses: appleboy/ssh-action@master
-                with:
-                    host: ${{ secrets.HOST }}
-                    username: ${{ secrets.USERNAME }}
-                    password: ${{ secrets.PASSWORD }}
-                    port: ${{ secrets.PORT }}
-                    script: whoami
+            -   name: Deploy to Staging server
+                uses: easingthemes/ssh-deploy@main
+                env:
+                  SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+                  SOURCE: '.'
+                  REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+                  REMOTE_USER: ${{ secrets.REMOTE_USER }}
+                  TARGET: ${{ secrets.REMOTE_TARGET }}
+                  EXCLUDE: 'vendor/, node_modules/, var/, .env.local/, .git, .yarn'
