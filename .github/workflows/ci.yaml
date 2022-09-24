@@ -124,4 +124,4 @@ jobs:
                     port: ${{ secrets.REMOTE_PORT }}
                     script: |
                         cd ${{ secrets.REMOTE_TARGET }}
-                        ls -al
+                        php bin/console doctrine:migrations:migrate
