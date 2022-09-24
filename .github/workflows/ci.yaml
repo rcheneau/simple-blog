@@ -123,5 +123,5 @@ jobs:
                     key: ${{ secrets.SSH_PRIVATE_KEY2 }}
                     port: ${{ secrets.REMOTE_PORT }}
                     script: |
-                        whoami
+                        cd ${{ secrets.REMOTE_TARGET }}
                         ls -al
