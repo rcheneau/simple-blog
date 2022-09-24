@@ -108,9 +108,9 @@ jobs:
                 uses: easingthemes/ssh-deploy@main
                 env:
                     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-                    SOURCE: '.'
+                    SOURCE: ''
                     REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
                     REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
                     REMOTE_USER: ${{ secrets.REMOTE_USER }}
                     TARGET: ${{ secrets.REMOTE_TARGET }}
-                    EXCLUDE: ".github .yarn fixtures node_modules scripts tests var .env* .gitignore .phpversion .phpunit.result.cache .yarnrc.yml composer.json composer.lock package.json phpunit.xml.dist symfony.lock tsconfig.json webpack.config.js yarn.lcok"
+                    EXCLUDE: ".github .yarn fixtures node_modules scripts tests var .env.local .env.test .gitignore .phpversion .phpunit.result.cache .yarnrc.yml composer.json composer.lock package.json phpunit.xml.dist symfony.lock tsconfig.json webpack.config.js yarn.lock"
