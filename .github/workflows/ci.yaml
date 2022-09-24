@@ -4,7 +4,7 @@ on:
         branches:
             - main
 jobs:
-    symfony:
+    tests:
         runs-on: ubuntu-latest
         name: Symfony 6.1 (PHP ${{ matrix.php-versions }})
         strategy:
@@ -108,9 +108,9 @@ jobs:
                 uses: easingthemes/ssh-deploy@main
                 env:
                     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-                    SOURCE: 'src/'
+                    SOURCE: ''
                     REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
                     REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
                     REMOTE_USER: ${{ secrets.REMOTE_USER }}
                     TARGET: ${{ secrets.REMOTE_TARGET }}
-                    EXCLUDE: "/node_modules/"
+                    EXCLUDE: ".github .yarn fixtures node_modules scripts tests var .env* .gitignore .phpversion .phpunit.result.cache .yarnrc.yml composer.json composer.lock package.json phpunit.xml.dist symfony.lock tsconfig.json webpack.config.js yarn.lcok"
