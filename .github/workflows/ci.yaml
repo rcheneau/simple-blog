@@ -74,6 +74,8 @@ jobs:
     deploy:
         runs-on: ubuntu-latest
         environment: production
+        env:
+            APP_ENV: prod
         strategy:
             fail-fast: true
             matrix:
