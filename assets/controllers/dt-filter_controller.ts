@@ -3,7 +3,7 @@ import { useDebounce } from 'stimulus-use';
 
 // noinspection JSUnusedGlobalSymbols
 export default class extends Controller<HTMLElement> {
-    static debounces = ['textSearch']
+    static debounces = ['textSearch'];
 
     connect() {
         useDebounce(this, {wait: 500});
