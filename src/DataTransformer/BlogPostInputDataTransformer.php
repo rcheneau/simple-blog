@@ -34,13 +34,15 @@ final class BlogPostInputDataTransformer
             $this->slugger->uniqueSlugInEntity($input->title ?? '', BlogPost::class)->toString(),
             $input->content ?? '',
             $user,
-            new DateTimeImmutable()
+            new DateTimeImmutable(),
+            $input->image
         );
     }
 
     public function transforms(BlogPost $blogPost): BlogPostInput
     {
         return new BlogPostInput(
+            $blogPost->getImage(),
             $blogPost->getTitle(),
             $blogPost->getContent(),
         );

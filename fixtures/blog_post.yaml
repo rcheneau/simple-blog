@@ -7,3 +7,4 @@ App\Entity\BlogPost:
             content: <text(5000)>
             author: '@user_*'
             createdAt: <dateTimeImmutableBetween("-200 days", "now")>
+            image: '@image_*'

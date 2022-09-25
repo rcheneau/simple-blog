@@ -14,8 +14,11 @@
         {% for post in pagination.pager %}
             <div class="col">
                 <div class="card shadow h-100">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Solid_blue.svg/512px-Solid_blue.svg.png"
-                         class="card-img-top" alt="..." style="height: 200px">
+                    <img src="{{ post.image ? post.image.name | imagine_filter('image_500_500') : asset('media/placeholder.png') }}"
+                         class="card-img-top"
+                         height="200"
+                         alt="{{  post.image ? post.image.alt : 'Placeholder' }}"
+                    >
                     <div class="card-body">
                         <h5 class="card-title text-truncate text-center" title="{{ post.title }}">
                             {{ post.title }}

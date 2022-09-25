@@ -7,13 +7,14 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Uid\UuidV4;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Use VichUploader to handle image upload.
  * Because of this most entity's attributes is set by a listener and cannot be initialized in controller.
- * These set methods (see @Vich\UploadableField above file field for list) must also accept null on their setter
+ * These set methods (see Vich\UploadableField above file field for list) must also accept null on their setter
  * because Vich will call erase methods to set them at null temporarily on image file update.
  */
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
@@ -55,6 +56,7 @@ class Image
         #[ORM\Column(type: 'datetime_immutable')]
         private DateTimeImmutable $createdAt,
 
+        #[Groups(['search'])]
         #[ORM\Column(length: 25)]
         private string            $title,
 

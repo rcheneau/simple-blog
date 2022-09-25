@@ -40,6 +40,10 @@ class BlogPost
 
         #[ORM\Column]
         private DateTimeImmutable $createdAt,
+
+        #[ORM\ManyToOne]
+        #[ORM\JoinColumn(nullable: true)]
+        private ?Image            $image = null,
     )
     {
     }
@@ -106,5 +110,17 @@ class BlogPost
     public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updatedAt;
+    }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function updateImage(?Image $image): self
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }

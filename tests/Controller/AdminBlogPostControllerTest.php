@@ -5,10 +5,14 @@ namespace App\Tests\Controller;
 use App\Repository\BlogPostRepository;
 use App\Repository\ImageRepository;
 use DateTimeImmutable;
+use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AdminBlogPostControllerTest extends AbstractControllerTest
 {
+
+    use RefreshDatabaseTrait;
+
     public function testAdminBlogPostManage()
     {
         $client = static::createClient();
@@ -42,6 +46,39 @@ class AdminBlogPostControllerTest extends AbstractControllerTest
         $this->assertSelectorTextContains('title', 'Gestion des articles');
 
         $this->assertEquals($count + 1, $blogPostRepository->count([]));
+    }
+
+    public function testAdminCreateBlogPostWithImage()
+    {
+        $client = static::createClient();
+        $client->disableReboot();
+
+        /** @var BlogPostRepository $blogPostRepository */
+        $blogPostRepository = static::getContainer()->get(BlogPostRepository::class);
+        $count = $blogPostRepository->count([]);
+
+        $imageRepository = static::getContainer()->get(ImageRepository::class);
+        $image = $imageRepository->findOneBy([]);
+
+        $this->login($client);
+
+        $crawler = $client->request('GET', '/fr/admin/posts/create');
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('title', 'Créer un article');
+
+        $form = $crawler->filter('form')->form();
+        $form['blog_post[image]'] = $image->getId()->toRfc4122();
+        $form['blog_post[title]'] = 'Test title post with image';
+        $form['blog_post[content]'] = 'Test content...';
+        $client->submit($form);
+        $client->followRedirect();
+        $this->assertResponseIsSuccessful();
+
+        $this->assertEquals($count + 1, $blogPostRepository->count([]));
+
+        $newBlogPost = $blogPostRepository->findOneBy(['title' => 'Test title post with image']);
+        $this->assertNotNull($newBlogPost->getImage());
+        $this->assertEquals($image->getId(), $newBlogPost->getImage()->getId());
     }
 
     public function testAdminUpdateBlogPost()
