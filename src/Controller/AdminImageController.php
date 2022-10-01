@@ -16,6 +16,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Imagick;
 use ImagickException;
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
@@ -78,9 +79,10 @@ final class AdminImageController extends AbstractController
     #[Route(path: '/images/create', name: 'create')]
     public function imageCreate(Request                   $request,
                                 EntityManagerInterface    $em,
-                                ImageInputDataTransformer $inputDataTransformer): Response
+                                ImageInputDataTransformer $inputDataTransformer,
+                                CacheManager              $cacheManager): Response
     {
-        return $this->handleImageForm($request, $inputDataTransformer, $em);
+        return $this->handleImageForm($request, $inputDataTransformer, $em, $cacheManager);
     }
 
     /**
@@ -91,11 +93,12 @@ final class AdminImageController extends AbstractController
                               Request                   $request,
                               EntityManagerInterface    $em,
                               UploadHandler             $uploadHandler,
-                              ImageInputDataTransformer $inputDataTransformer): Response
+                              ImageInputDataTransformer $inputDataTransformer,
+                              CacheManager              $cacheManager): Response
     {
         $uploadHandler->inject($image, 'file');
 
-        return $this->handleImageForm($request, $inputDataTransformer, $em, $image);
+        return $this->handleImageForm($request, $inputDataTransformer, $em, $cacheManager, $image);
     }
 
     #[Route(path: '/images/delete/{id}', name: 'delete', methods: Request::METHOD_POST)]
@@ -116,6 +119,7 @@ final class AdminImageController extends AbstractController
     private function handleImageForm(Request                   $request,
                                      ImageInputDataTransformer $dataTransformer,
                                      EntityManagerInterface    $em,
+                                     CacheManager              $cacheManager,
                                      ?Image                    $image = null): Response
     {
         $form = $this->createForm(ImageType::class, $image ? $dataTransformer->transforms($image) : null);
@@ -132,6 +136,8 @@ final class AdminImageController extends AbstractController
                 $user = $this->getUser();
                 $data->updateImage($image);
                 $image->updatedByAt($user, new DateTimeImmutable());
+
+                $cacheManager->remove($image->getName());
             } else {
                 $image = $dataTransformer->createImage($data);
             }
