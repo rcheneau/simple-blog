@@ -14,7 +14,10 @@ use App\Service\PaginationManager;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
+use Imagick;
+use ImagickException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -69,6 +72,9 @@ final class AdminImageController extends AbstractController
         );
     }
 
+    /**
+     * @throws ImagickException
+     */
     #[Route(path: '/images/create', name: 'create')]
     public function imageCreate(Request                   $request,
                                 EntityManagerInterface    $em,
@@ -77,6 +83,9 @@ final class AdminImageController extends AbstractController
         return $this->handleImageForm($request, $inputDataTransformer, $em);
     }
 
+    /**
+     * @throws ImagickException
+     */
     #[Route(path: '/images/edit/{id}', name: 'edit')]
     public function imageEdit(Image                     $image,
                               Request                   $request,
@@ -101,6 +110,9 @@ final class AdminImageController extends AbstractController
         return new Response(null, 403);
     }
 
+    /**
+     * @throws ImagickException
+     */
     private function handleImageForm(Request                   $request,
                                      ImageInputDataTransformer $dataTransformer,
                                      EntityManagerInterface    $em,
@@ -112,6 +124,8 @@ final class AdminImageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var ImageInput $data */
             $data = $form->getData();
+
+            $this->processImage($data->file);
 
             if ($image) {
                 /** @var User $user */
@@ -132,5 +146,26 @@ final class AdminImageController extends AbstractController
             'admin/image_create_edit.html.twig',
             ['form' => $form->createView(), 'image' => $image]
         );
+    }
+
+    /**
+     * Transforms image to WEBP format, remove metadata and
+     *
+     * @throws ImagickException
+     */
+    private function processImage(?File $file): void
+    {
+        if (!$file) {
+            return;
+        }
+
+        $imagick = new Imagick($file->getRealPath());
+
+        $imagick->setImageFormat('webp');
+        $imagick->stripImage();
+        $imagick->setImageCompressionQuality(85);
+        $imagick->writeImage($file->getRealPath());
+
+        $imagick->destroy();
     }
 }
