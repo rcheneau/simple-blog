@@ -15,7 +15,7 @@
             <div class="col">
                 <div class="card shadow h-100">
                     <img src="{{ post.image ? post.image.name | imagine_filter('image_500_500') : asset('media/placeholder.png') }}"
-                         class="card-img-top"
+                         class="card-img-top app-thumbnail-cover"
                          height="200"
                          alt="{{  post.image ? post.image.alt : 'Placeholder' }}"
                     >

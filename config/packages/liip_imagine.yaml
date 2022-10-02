@@ -17,4 +17,4 @@ liip_imagine:
             data_loader: images
             quality: 75
             filters:
-                thumbnail: { size: [ 500, 500 ], mode: outbound }
+                thumbnail: { size: [ 500, 500 ], mode: inset }

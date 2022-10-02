@@ -60,3 +60,7 @@ label.required:after, legend.required:after {
     content: "*";
     color: red;
 }
+
+img.app-thumbnail-cover {
+    object-fit: cover;
+}
