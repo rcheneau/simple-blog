@@ -5,6 +5,7 @@ btn.delete: Supprimer
 btn.edit: Éditer
 btn.confirm: Confirmer
 btn.cancel: Annuler
+btn.preview: Prévisualisation
 
 listing.count: >-
     {count, plural,

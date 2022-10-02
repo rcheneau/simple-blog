@@ -92,6 +92,19 @@ final class AdminBlogPostController extends AbstractController
         return $this->handleBlogPostForm($request, $dataTransformer, $em, $blogPost);
     }
 
+    #[Route(path: '/posts/preview', name: 'preview')]
+    public function _preview(Request $request): Response
+    {
+        $blogPost = $request->get('blog_post', ['title' => '', 'content' => '']);
+
+        return $this->render(
+            'blog_post/_item.html.twig',
+            [
+                'blogPost' => $blogPost,
+            ]
+        );
+    }
+
     #[Route(path: '/posts/delete/{slug}', name: 'delete', methods: Request::METHOD_POST)]
     public function deleteImage(BlogPost $blogPost, EntityManagerInterface $em, Request $request): Response
     {

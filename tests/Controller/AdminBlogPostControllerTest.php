@@ -7,6 +7,7 @@ use App\Repository\ImageRepository;
 use DateTimeImmutable;
 use Hautelook\AliceBundle\PhpUnit\RefreshDatabaseTrait;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Mime\Part\Multipart\FormDataPart;
 
 class AdminBlogPostControllerTest extends AbstractControllerTest
 {
@@ -110,5 +111,20 @@ class AdminBlogPostControllerTest extends AbstractControllerTest
         $this->assertEquals('Updated content', $updatedPost->getContent());
         $this->assertEquals($loggedUser->getId(), $updatedPost->getUpdatedBy()->getId());
         $this->assertEquals($updatedPost->getUpdatedAt()->format('Y-m-d'), (new DateTimeImmutable())->format('Y-m-d'));
+    }
+
+    public function testAdminBlogPostPreview()
+    {
+        $client = static::createClient();
+        $this->login($client);
+
+        $crawler = $client->request('POST', '/fr/admin/posts/preview', [
+            'blog_post' => ['content' => 'My preview content...', 'title' => 'Preview title'],
+        ]);
+
+
+        $this->assertResponseIsSuccessful();
+        $this->assertEquals('Preview title', $crawler->filter('.card-title')->innerText());
+        $this->assertEquals('My preview content...', $crawler->filter('.card-text p')->innerText());
     }
 }

@@ -2,16 +2,6 @@
 
 {% block title %}{{ blogPost.title }}{% endblock %}
 
-
  {% block body %}
-     <div class="card shadow">
-         <div class="card-body">
-             <h3 class="card-title">
-                 {{ blogPost.title }}
-             </h3>
-             <div class="card-text">
-                 {{ blogPost.content | markdown_to_html }}
-             </div>
-         </div>
-     </div>
+     {% include 'blog_post/_item.html.twig' %}
  {% endblock %}
