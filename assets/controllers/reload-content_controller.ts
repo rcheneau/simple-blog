@@ -7,7 +7,6 @@ export default class extends Controller<HTMLElement> {
             headers: {'X-Requested-with': 'XMLHttpRequest'},
         });
 
-        console.log(event.detail.scrollToTopOfElement)
         if (event.detail.scrollToTopOfElement) {
             this.element.scrollIntoView();
         }
