@@ -8,7 +8,7 @@ export default class extends Controller<HTMLElement> {
         });
 
         console.log(event.detail.scrollToTopOfElement)
-        if (event.detail.scrollToTopOfElement === true) {
+        if (event.detail.scrollToTopOfElement) {
             this.element.scrollIntoView();
         }
 
