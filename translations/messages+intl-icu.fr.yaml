@@ -47,3 +47,13 @@ image.uploaded_by: Ajoutée par
 image.uploaded_at: Ajoutée le
 
 gallery.no_images: Aucune image
+
+error.404.title: Page non trouvée
+error.404.msg: La page demandée n'a pas pu être localisée. Vérifiez qu'il n'y a pas de faute d'orthographe dans l'URL.
+error.404.btn_homepage: Retourner à l'acceuil
+
+error.403.title: Accès interdit
+error.403.msg: Vous n'avez pas accès à cette page.
+
+error.title: Une erreur est survenue
+error.msg: Une erreur inconnue est survenue.

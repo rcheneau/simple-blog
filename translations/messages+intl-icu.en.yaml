@@ -47,3 +47,13 @@ image.uploaded_by: Added by
 image.uploaded_at: Added at
 
 gallery.no_images: No image
+
+error.404.title: Page not found
+error.404.msg: The requested page couldn't be located. Checkout for any URL misspelling.
+error.404.btn_homepage: Go back to homepage
+
+error.403.title: Access forbidden
+error.403.msg: You do not have access to this page.
+
+error.title: An error occurred
+error.msg: An unknown error occurred.

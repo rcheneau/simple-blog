@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="text-center">
+        <h1>{{ 'error.404.title' | trans }}</h1>
+
+        <p>
+            {{ 'error.404.msg' | trans }}
+        </p>
+
+        <a href="{{ path('app_home') }}" class="btn btn-primary">
+            {{ 'error.404.btn_homepage' | trans }}
+        </a>
+    </div>
+{% endblock %}
