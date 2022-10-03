@@ -24,12 +24,16 @@ final class BreadcrumbManager
     /**
      * Returns array containing only items in the given node name path.
      *
-     * @param string $name
+     * @param string|null $name
      *
      * @return array<int, array<string, mixed>>
      */
-    public function list(string $name): array
+    public function list(?string $name): array
     {
+        if (!$name) {
+            return [];
+        }
+
         $item = $this->bc[$name] ?? null;
 
         if (!$item) {
