@@ -4,12 +4,11 @@
     <div class="row g-0 app-gallery">
         {% for image in pagination.pager %}
             <div class="col-12 col-md-6 col-lg-4 app-zoom-on-hover">
-                <a href="{{ path('app_image_download', {id: image.id}) }}" class="position-relative d-block">
+                <a href="{{ path('app_image_download', {id: image.id}) }}" class="position-relative d-block h-100">
                     <img src="{{ image.name | imagine_filter('image_500_500') }}"
                          class="img-fluid app-gallery"
                          alt="{{ image.alt }}"
-                         height="500"
-                         width="500"
+                         height="327"
                     />
                     <div class="d-flex justify-content-center flex-column text-center app-mask text-white">
                         <h4>{{ image.title }}</h4>

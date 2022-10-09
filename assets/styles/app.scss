@@ -54,6 +54,7 @@ footer {
 
 .app-zoom-on-hover:hover img {
     transform: scale(1.3);
+    padding: 0.25rem;
 }
 
 label.required:after, legend.required:after {
@@ -66,7 +67,8 @@ img.app-thumbnail-cover {
 }
 
 img.app-gallery {
-    height: 500px;
-    width: 500px;
+    max-height: 327px;
+    height: 100%;
+    width: 100%;
     object-fit: cover;
 }
