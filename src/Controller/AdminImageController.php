@@ -155,7 +155,7 @@ final class AdminImageController extends AbstractController
     }
 
     /**
-     * Transforms image to WEBP format, remove metadata and
+     * Transforms image to WEBP format, remove metadata and set quality to 85%
      *
      * @throws ImagickException
      */
