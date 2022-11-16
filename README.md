@@ -11,3 +11,9 @@ yarn install
 symfony serve
 yarn watch
 ```
+
+## Tests
+
+```shell
+php bin/phpunit 
+```
