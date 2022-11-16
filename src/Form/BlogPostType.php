@@ -49,11 +49,7 @@ final class BlogPostType extends AbstractType
                         return null;
                     }
 
-                    try {
-                        $image = $this->imageRepository->find($uuid);
-                    } catch (ConversionException) {
-                        $image = null;
-                    }
+                    $image = $this->imageRepository->find($uuid);
 
                     if (null === $image) {
                         throw new TransformationFailedException(sprintf(
