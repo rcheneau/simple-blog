@@ -9,6 +9,6 @@ home_controller:
     resource: ../src/Controller/HomeController.php
     type: attribute
 
-image_download_controller:
-    resource: ../src/Controller/ImageDownloadController.php
+image_controller:
+    resource: ../src/Controller/ImageController.php
     type: attribute

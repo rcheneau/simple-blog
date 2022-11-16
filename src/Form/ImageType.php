@@ -31,7 +31,7 @@ final class ImageType extends AbstractType
                 'label' => 'image.file',
                 'required' => $data === null,
                 'download_uri' =>   $data && $data->id
-                    ? $this->router->generate('app_image_download', ['id' => $data->id->toRfc4122()])
+                    ? $this->router->generate('app_image_original', ['id' => $data->id->toRfc4122()])
                     : false,
                 'imagine_pattern' => 'image_500_500',
             ])

@@ -18,3 +18,9 @@ liip_imagine:
             quality: 75
             filters:
                 thumbnail: { size: [ 500, 500 ], mode: inset }
+        image_large:
+            data_loader: images
+            quality: 50
+            filters:
+                downscale:
+                    max: [1024, 1024]
