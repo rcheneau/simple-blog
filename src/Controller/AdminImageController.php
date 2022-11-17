@@ -102,11 +102,12 @@ final class AdminImageController extends AbstractController
     }
 
     #[Route(path: '/images/delete/{id}', name: 'delete', methods: Request::METHOD_POST)]
-    public function deleteImage(Image $image, EntityManagerInterface $em, Request $request): Response
+    public function deleteImage(Image $image, EntityManagerInterface $em, Request $request, CacheManager $cacheManager): Response
     {
         if ($this->isCsrfTokenValid('delete-image-' . $image->getId()->toRfc4122(), $request->headers->get('X-CSRF-Token'))) {
             $em->remove($image);
             $em->flush();
+            $cacheManager->remove($image->getName());
             return new Response(null, 204);
         }
 
