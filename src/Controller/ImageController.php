@@ -34,7 +34,7 @@ final class ImageController extends AbstractController
             );
         }
 
-        $path = ltrim(parse_url($cacheManager->resolve($image->getName(), 'image_large'), PHP_URL_PATH), '/');
+        $path = ltrim((string)parse_url($cacheManager->resolve($image->getName(), 'image_large'), PHP_URL_PATH), '/');
 
         return new BinaryFileResponse("$projectDir/public/$path");
     }
