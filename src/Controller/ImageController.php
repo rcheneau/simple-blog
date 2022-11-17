@@ -8,6 +8,8 @@ use Liip\ImagineBundle\Imagine\Data\DataManager;
 use Liip\ImagineBundle\Imagine\Filter\FilterManager;
 use Liip\ImagineBundle\Service\FilterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Vich\UploaderBundle\Handler\DownloadHandler;
@@ -16,19 +18,23 @@ use Vich\UploaderBundle\Handler\DownloadHandler;
 final class ImageController extends AbstractController
 {
     #[Route(path: '/large/{id}', name: 'large')]
-    public function large(Image $image, CacheManager $cacheManager, FilterManager $filterManager, DataManager $dataManager): Response
+    public function large(Image $image, CacheManager $cacheManager, FilterManager $filterManager, DataManager $dataManager, #[Autowire('%kernel.project_dir%')] string $projectDir): Response
     {
-        $cacheManager->store(
-            $filterManager->applyFilter(
+        if (!$cacheManager->isStored($image->getName(), 'image_large')) {
+            $largeImage = $filterManager->applyFilter(
                 $dataManager->find('image_large', $image->getName()),
                 'image_large'
-            ),
-            $image->getName(),
-            'image_large'
-        );
-        $resolvedPath = $cacheManager->resolve($image->getName(), 'image_large');
+            );
+            $cacheManager->store(
+                $largeImage,
+                $image->getName(),
+                'image_large'
+            );
+        }
 
-        return $this->redirect($resolvedPath);
+        $path = ltrim(parse_url($cacheManager->resolve($image->getName(), 'image_large'), PHP_URL_PATH), '/');
+
+        return new BinaryFileResponse("$projectDir/public/$path");
     }
 
     #[Route(path: '/original/{id}', name: 'original')]

@@ -18,7 +18,7 @@ class ImageControllerTest extends AbstractControllerTest
 
         $client->request('GET', '/images/large/' . $image->getId()->toRfc4122());
 
-        $this->assertResponseStatusCodeSame(302);
+        $this->assertResponseIsSuccessful();
     }
 
     public function testImageOriginal()
