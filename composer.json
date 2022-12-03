@@ -20,22 +20,21 @@
         "liip/imagine-bundle": "^2.8",
         "pagerfanta/doctrine-orm-adapter": "^3.6",
         "pagerfanta/twig": "^3.6",
-        "sensio/framework-extra-bundle": "^6.2",
-        "symfony/console": "6.1.*",
-        "symfony/dotenv": "6.1.*",
+        "symfony/console": "6.2.*",
+        "symfony/dotenv": "6.2.*",
         "symfony/flex": "^2",
-        "symfony/form": "6.1.*",
-        "symfony/framework-bundle": "6.1.*",
-        "symfony/proxy-manager-bridge": "6.1.*",
-        "symfony/runtime": "6.1.*",
-        "symfony/security-bundle": "6.1.*",
-        "symfony/serializer": "6.1.*",
-        "symfony/translation": "6.1.*",
-        "symfony/twig-bundle": "6.1.*",
-        "symfony/uid": "6.1.*",
-        "symfony/validator": "6.1.*",
+        "symfony/form": "6.2.*",
+        "symfony/framework-bundle": "6.2.*",
+        "symfony/proxy-manager-bridge": "6.2.*",
+        "symfony/runtime": "6.2.*",
+        "symfony/security-bundle": "6.2.*",
+        "symfony/serializer": "6.2.*",
+        "symfony/translation": "6.2.*",
+        "symfony/twig-bundle": "6.2.*",
+        "symfony/uid": "6.2.*",
+        "symfony/validator": "6.2.*",
         "symfony/webpack-encore-bundle": "^1.15",
-        "symfony/yaml": "6.1.*",
+        "symfony/yaml": "6.2.*",
         "twig/extra-bundle": "^3.4",
         "twig/intl-extra": "^3.4",
         "twig/markdown-extra": "^3.4",
@@ -92,7 +91,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.1.*"
+            "require": "6.2.*"
         }
     },
     "require-dev": {
@@ -102,13 +101,13 @@
         "phpstan/phpstan-doctrine": "^1.3",
         "phpstan/phpstan-symfony": "^1.2",
         "phpunit/phpunit": "^9.5",
-        "symfony/browser-kit": "6.1.*",
-        "symfony/css-selector": "6.1.*",
+        "symfony/browser-kit": "6.2.*",
+        "symfony/css-selector": "6.2.*",
         "symfony/maker-bundle": "^1.45",
-        "symfony/phpunit-bridge": "^6.1",
-        "symfony/property-access": "6.1.*",
-        "symfony/stopwatch": "6.1.*",
-        "symfony/var-dumper": "6.1.*",
-        "symfony/web-profiler-bundle": "6.1.*"
+        "symfony/phpunit-bridge": "^6.2",
+        "symfony/property-access": "6.2.*",
+        "symfony/stopwatch": "6.2.*",
+        "symfony/var-dumper": "6.2.*",
+        "symfony/web-profiler-bundle": "6.2.*"
     }
 }
