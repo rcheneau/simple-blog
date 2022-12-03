@@ -25,7 +25,7 @@ final class ImageInput
         #[Length(max: 100)]
         public ?string $description = null,
 
-        #[File(maxSize: '8Mi', mimeTypes: ['image/png', 'image/jpeg'])]
+        #[File(maxSize: '15Mi', mimeTypes: ['image/png', 'image/jpeg'])]
         #[Vich\UploadableField(mapping: 'image', fileNameProperty: 'name')]
         public UploadedFile|\Symfony\Component\HttpFoundation\File\File|null   $file = null,
 
